@@ -27,15 +27,23 @@ $ npm start
 | /signup              | Public          | SignupPage               |
 | /login               | Public          | LoginPage                |
 | /home                | Public          | HomePage                 |
+| /products            | Public          | ProductsPage             |
+| /products/:id        | Public          | ProductDetailsPage       |
 | /profile             | Private (user)  | ProfilePage              |
 | /favs                | Private (user)  | FavoritesPage            |
 | /perfilinfo          | Private (user)  | ProfileInfoPage          |
-| /products            | Public          | ProductsPage             |
-| /products/:id        | Public          | ProductDetailsPage       |
 
 
 
 ## Components
+
+-Navbar
+-SearchBar
+-AddProduct
+-AddFavorite
+-EditProduct
+-PrivateRoute
+
 
 
 
