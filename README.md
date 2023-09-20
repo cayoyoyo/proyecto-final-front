@@ -37,12 +37,12 @@ $ npm start
 
 ## Components
 
--Navbar
--SearchBar
--AddProduct
--AddFavorite
--EditProduct
--PrivateRoute
+- Navbar
+- SearchBar
+- AddProduct
+- AddFavorite
+- EditProduct
+- PrivateRoute
 
 
 
