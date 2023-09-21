@@ -2,6 +2,7 @@ import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import axios from "axios";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ function SignupPage() {
     const requestBody = { email, password, name };
 
     // Send a request to the server using axios
-    /* 
+   
     const authToken = localStorage.getItem("authToken");
     axios.post(
       `${process.env.REACT_APP_SERVER_URL}/auth/signup`, 
@@ -29,7 +30,7 @@ function SignupPage() {
       { headers: { Authorization: `Bearer ${authToken}` },
     })
     .then((response) => {})
-    */
+  
 
     // Or using a service
     authService
