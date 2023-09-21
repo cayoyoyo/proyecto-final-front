@@ -24,6 +24,7 @@ $ npm start
 ## Routes 
 | Route                | Privacy         | Renders                  |
 |----------------------|-----------------|--------------------------|
+| /                    | Public          | HomePage
 | /signup              | Public          | SignupPage               |
 | /login               | Public          | LoginPage                |
 | /home                | Public          | HomePage                 |
@@ -38,6 +39,7 @@ $ npm start
 ## Components
 
 - Navbar
+- Footer
 - SearchBar
 - AddProduct
 - AddFavorite
