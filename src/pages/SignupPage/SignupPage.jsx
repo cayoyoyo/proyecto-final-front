@@ -22,19 +22,17 @@ function SignupPage() {
     const requestBody = { email, password, name };
 
     // Send a request to the server using axios
-   
-    const authToken = localStorage.getItem("authToken");
-    axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/auth/signup`, 
-      requestBody, 
-      { headers: { Authorization: `Bearer ${authToken}` },
-    })
-    .then((response) => {})
-  
 
-    // Or using a service
-    authService
-      .signup(requestBody)
+    // const authToken = localStorage.getItem("authToken");
+    // axios
+    //   .post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody, {
+    //     headers: { Authorization: `Bearer ${authToken}` },
+    //   })
+      // .then((response) => {})
+
+      // Or using a service
+      authService
+        .signup(requestBody)
       .then((response) => {
         // If the POST request is successful redirect to the login page
         navigate("/login");
