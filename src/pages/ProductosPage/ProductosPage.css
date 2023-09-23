@@ -1,0 +1,97 @@
+.product-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+
+    margin: 10px;
+    padding: 10px;
+}
+
+.ulListaProdutos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.liListaProdutos {
+    background-color: rgba(0, 0, 255, 0.345);
+    margin: 1%;
+    width: 200px;
+    padding: 5px;
+    list-style: none;
+    border: solid 1.5px black;
+}
+
+/* Estilo para el botón de favoritos */
+.favoritos-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #555555;
+}
+
+/* Estilo para el símbolo de corazón */
+.coracao {
+    color: red;
+    margin-right: 5px;
+    /* Espacio entre el corazón y el texto "Favorito" */
+    font-size: 18px;
+}
+
+
+.detailTitle {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-bottom: -37px;
+}
+
+.detailText {
+    display: grid;
+    justify-items: start;
+    padding: 10px;
+    margin-right: 10px;
+    width: max-content;
+    margin-top: -38px;
+}
+
+.detailText p {
+    margin: 1;
+}
+
+.disponible {
+    background-color: green;
+    color: aliceblue;
+    padding: 5px;
+}
+
+.noDisponible {
+    background-color: rgb(218, 12, 12);
+    color: aliceblue;
+    padding: 5px;
+}
+
+.divDetailProduct {
+    width: fit-content;
+    margin: 15px;
+    margin-left: 25%;
+    border: solid 0.5px black;
+    background-color: #5555557c;
+    padding: 9px;
+}
+
+.none {
+    display: none;
+}
+
+.active {
+    display: block !important;
+}
+
+.formProduct label {
+    display: block;
+}

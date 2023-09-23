@@ -1,4 +1,5 @@
 import "./App.css";
+import "./pages/ProductosPage/ProductosPage.css"
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -9,6 +10,9 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
+
+import ProductosPage from "./pages/ProductosPage/ProductListPage";
+import ProductosDetailPage from "./pages/ProductosPage/ProductDetailPage";
 
 function App() {
   return (
@@ -43,6 +47,12 @@ function App() {
             </IsAnon>
           }
         />
+
+        <Route path="/product" element={<ProductosPage />} />
+        <Route path="/product/:id" element={<ProductosDetailPage />} />
+
+
+
       </Routes>
     </div>
   );
