@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
+import Profile from "../../components/profile";
+import { Link } from 'react-router-dom';
 
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
