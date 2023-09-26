@@ -1,9 +1,11 @@
 import "./ProfilePage.css";
+import Profile from "../../components/profile";
+import { Link } from 'react-router-dom';
 
 function ProfilePage() {
   return (
     <div>
-      <h1>Profile page</h1>
+      <Profile />
     </div>
   );
 }
