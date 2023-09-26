@@ -43,8 +43,8 @@ function ProductForm() {
     return (
         <div className="formProduct">
             <h1>Formulario de Producto</h1>
-            <form onSubmit={() => { }}>
-                <div>
+            <form onSubmit={() => { }} className="form-product">
+                <div className="formProduct01">
                     <label>Título:</label>
                     <input
                         type="text"
@@ -54,7 +54,7 @@ function ProductForm() {
                     // required
                     />
                 </div>
-                <div>
+                <div className="formProduct02">
                     <label>Descripción:</label>
                     <textarea
                         name="description"
@@ -63,7 +63,7 @@ function ProductForm() {
                     // required
                     />
                 </div>
-                <div>
+                <div className="formProduct03">
                     <label>Precio:</label>
                     <input
                         type="number"
@@ -73,7 +73,7 @@ function ProductForm() {
                     // required
                     />
                 </div>
-                <div>
+                <div className="formProduct04">
                     <label>Condición:</label>
                     <select
                         name="condition"
