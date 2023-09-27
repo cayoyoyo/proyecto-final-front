@@ -41,7 +41,7 @@ function ProductList() {
                 {products.map((producto) => (
 
                     <li className='liListaProdutos' key={producto._id}>
-                        <FavoritosButton />
+                        <FavoritosButton id={producto._id} />
                         <img className='product-image' src={producto.images[0]} alt={producto.title} />
                         <p className='titleProducto'>{producto.title}</p>
                         <p>€ {producto.price}</p>
