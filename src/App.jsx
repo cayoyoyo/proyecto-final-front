@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Chat />
+     
 
       <Routes>
         <Route path="/" element={<HomePage />} />

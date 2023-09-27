@@ -1,97 +1,115 @@
-// import { useState, useEffect } from 'react';
-// import axios from "axios";
-// import { useParams } from 'react-router-dom';
-
-// const { id } = useParams();
-// const API_URL = "http://localhost:5005";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function ProductForm() {
-    // const [formData, setFormData] = useState({
-    //     title: '',
-    //     description: '',
-    //     price: '',
-    //     condition: '',
-    //     images: [],
-    // });
+  const API_URL = "http://localhost:5005";
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    price: 0,
+    condition: 'new',
+  });
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData({
-    //         ...formData,
-    //         [name]: value,
-    //     });
-    // };
+  const [selectedImage, setSelectedImage] = useState(null);
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    //     axios
-    //         .post(`${API_URL}/product/${id}/edit`, formData)
-    //         .then(() => {
-    //             setFormData({
-    //                 title: '',
-    //                 description: '',
-    //                 price: '',
-    //                 condition: '',
-    //                 images: [],
-    //             })
-    //         })
-    //         .catch((err) => console.log(err));
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+  };
 
-    // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    return (
-        <div className="formProduct">
-            <h1>Formulario de Producto</h1>
-            <form onSubmit={() => { }} className="form-product">
-                <div className="formProduct01">
-                    <label>Título:</label>
-                    <input
-                        type="text"
-                        name="title"
-                    // value={formData.title}
-                    // onChange={handleChange}
-                    // required
-                    />
-                </div>
-                <div className="formProduct02">
-                    <label>Descripción:</label>
-                    <textarea
-                        name="description"
-                    // value={formData.description}
-                    // onChange={handleChange}
-                    // required
-                    />
-                </div>
-                <div className="formProduct03">
-                    <label>Precio:</label>
-                    <input
-                        type="number"
-                        name="price"
-                    // value={formData.price}
-                    // onChange={handleChange}
-                    // required
-                    />
-                </div>
-                <div className="formProduct04">
-                    <label>Condición:</label>
-                    <select
-                        name="condition"
-                    // value={formData.condition}
-                    // onChange={handleChange}
-                    >
-                        <option value="new">Nuevo</option>
-                        <option value="used">Usado</option>
-                        <option value="like new">Como nuevo</option>
-                    </select>
-                </div>
+    const formDataWithImage = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataWithImage.append(key, value);
+    });
 
-                <div>
-                    <button type="submit">Guardar Producto</button>
-                </div>
-            </form>
+    formDataWithImage.append('product-image', selectedImage);
+
+    axios
+      .post(`${API_URL}/product/add`, formDataWithImage, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        console.log('Producto agregado con éxito:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error al agregar un producto:', error);
+      });
+  };
+
+  return (
+    <div className="formProduct">
+      <h1>Formulario de Producto</h1>
+      <form onSubmit={handleSubmit} className="form-product">
+        <div className="formProduct01">
+          <label>Título:</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
         </div>
-    );
+        <div className="formProduct02">
+          <label>Descripción:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="formProduct03">
+          <label>Precio:</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="formProduct04">
+          <label>Condición:</label>
+          <select
+            name="condition"
+            value={formData.condition}
+            onChange={handleChange}
+          >
+            <option value="new">Nuevo</option>
+            <option value="used">Usado</option>
+            <option value="like new">Como nuevo</option>
+          </select>
+        </div>
+        <div className="formProduct05">
+          <label>Imagen:</label>
+          <input
+            type="file"
+            name="product-image"
+            accept="image/*"
+            onChange={handleImageChange}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit">Guardar Producto</button>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default ProductForm;
