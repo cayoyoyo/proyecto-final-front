@@ -2,8 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
-import Profile from "../../components/profile";
-import { Link } from 'react-router-dom';
 
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
@@ -28,10 +26,9 @@ function ProfilePage() {
     }
   }, [user, isLoading]);
 
-
   const handleRemoveFavorite = (productId) => {
     const apiUrl = `http://localhost:5005/profile/${profileUser._id}/favorites/remove`;
-    
+
     axios
       .delete(apiUrl, { data: { productId } })
       .then((response) => {
@@ -39,10 +36,9 @@ function ProfilePage() {
         setProfileUser(response.data.user);
       })
       .catch((error) => {
-        console.error('Error al eliminar el producto de favoritos:', error);
+        console.error("Error al eliminar el producto de favoritos:", error);
       });
   };
-  
 
   return (
     <div>
@@ -57,37 +53,39 @@ function ProfilePage() {
 
           {/* <h3>Productos Favoritos {profileUser.favoriteProducts}</h3> */}
           <ul className="product-list">
-  {profileUser.favoriteProducts && profileUser.favoriteProducts.length > 0 ? (
-    profileUser.favoriteProducts.map((product) => (
-      <li key={product._id}>
-        <div className="product-card">
-          <div className="product-image">
-            {product.images && product.images.length > 0 ? (
-              <img src={product.images[0]} alt={product.title} />
+            {profileUser.favoriteProducts &&
+            profileUser.favoriteProducts.length > 0 ? (
+              profileUser.favoriteProducts.map((product) => (
+                <li key={product._id}>
+                  <div className="product-card">
+                    <div className="product-image">
+                      {product.images && product.images.length > 0 ? (
+                        <img src={product.images[0]} alt={product.title} />
+                      ) : (
+                        <div>No hay imagen disponible</div>
+                      )}
+                    </div>
+                    <div className="product-details">
+                      <h3>{product.title}</h3>
+                      <p>{product.description}</p>
+                      <p>Precio: ${product.price}</p>
+                      <p>Condición: {product.condition}</p>
+                      <p>Disponible: {product.available ? "Sí" : "No"}</p>
+                      <p>
+                        Fecha de publicación:{" "}
+                        {new Date(product.publicationDate).toLocaleDateString()}
+                      </p>
+                      <button onClick={() => handleRemoveFavorite(product._id)}>
+                        Eliminar de favoritos
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))
             ) : (
-              <div>No hay imagen disponible</div>
+              <li>No hay productos favoritos</li>
             )}
-          </div>
-          <div className="product-details">
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <p>Precio: ${product.price}</p>
-            <p>Condición: {product.condition}</p>
-            <p>Disponible: {product.available ? 'Sí' : 'No'}</p>
-            <p>Fecha de publicación: {new Date(product.publicationDate).toLocaleDateString()}</p>
-            <button onClick={() => handleRemoveFavorite(product._id)}>
-    Eliminar de favoritos
-  </button>
-          </div>
-        </div>
-      </li>
-    ))
-  ) : (
-    <li>No hay productos favoritos</li>
-  )}
-</ul>
-
-
+          </ul>
         </div>
       ) : (
         <div>No se pudo cargar el perfil del usuario.</div>
