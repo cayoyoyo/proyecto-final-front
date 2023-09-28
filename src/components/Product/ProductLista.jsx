@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import FavoriteButton from "../FavoriteButton";
 import ProductForm from "./ProductForm";
+import FavoriteButton from "../FavoriteButton";
 
 function ProductList() {
   const API_URL = "http://localhost:5005";
@@ -10,7 +10,8 @@ function ProductList() {
   const [products, setProducts] = useState([]);
   const [display, setDisplay] = useState("none");
 
-  useEffect(() => {
+  // Define una función para cargar la lista de productos
+  const fetchProducts = () => {
     axios
       .get(`${API_URL}/product`)
       .then((response) => {
@@ -18,7 +19,12 @@ function ProductList() {
         setProducts(response.data);
       })
       .catch((err) => console.log("hay un error " + err));
+  };
+
+  useEffect(() => {
+    fetchProducts(); // Carga la lista de productos cuando el componente se monta
   }, []);
+
 
   return (
     <div>
@@ -37,7 +43,7 @@ function ProductList() {
       </button>
 
       <div className={display}>
-        <ProductForm />
+        <ProductForm reloadProducts={fetchProducts} />
       </div>
 
       <ul className="ulListaProdutos">

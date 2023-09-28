@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function ProductForm() {
+function ProductForm(props) {
   const API_URL = "http://localhost:5005";
   const [formData, setFormData] = useState({
     title: '',
@@ -11,6 +12,7 @@ function ProductForm() {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [display, setDisplay] = useState("active");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,14 +45,16 @@ function ProductForm() {
       })
       .then((response) => {
         console.log('Producto agregado con éxito:', response.data);
+        props.reloadProducts();
+       setDisplay("none");
       })
       .catch((error) => {
         console.error('Error al agregar un producto:', error);
       });
+      
   };
-
   return (
-    <div className="formProduct">
+    <div className={`formProduct ${display}`}>
       <h1>Formulario de Producto</h1>
       <form onSubmit={handleSubmit} className="form-product">
         <div className="formProduct01">
@@ -101,6 +105,7 @@ function ProductForm() {
             name="product-image"
             accept="image/*"
             onChange={handleImageChange}
+            multiple
             required
           />
         </div>
