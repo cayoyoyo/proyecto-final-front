@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
+import { AuthContext } from "../../context/auth.context";
 
 function FavoritosButton(props) {
+    const [profileUser, setProfileUser] = useState(null);
     const [favorito, setFavorito] = useState(false);
+    const { user, isLoading } = useContext(AuthContext);
     const API_URL = "http://localhost:5005";
-    const productId = props.id;
-    const userId = '65144b54c1c43a8007e58352';
+    const productId = props.id
+    // const token = localStorage.getItem('token');
+    // console.log("Token", token)
 
     const toggleFavorito = () => {
         if (!favorito) {
             // Agregar producto a favoritos
             axios
-                .get(`${API_URL}/profile/${userId}/favorites/add/${productId}`)
+                .get(`http://localhost:5005/profile/65144b54c1c43a8007e58352/favorites/add/${productId}`)
                 .then((response) => {
                     console.log("Producto agregado a favoritos:", response.data);
                 })
@@ -26,9 +30,13 @@ function FavoritosButton(props) {
                     // setProfileUser(response.data.user);
                     console.log("producto quitado!!!")
                 })
-                .catch((error) => {
-                    console.error("Error al eliminar el producto de favoritos:", error);
-                });
+                .catch((err) => console.log("hay un error " + err));
+
+
+        }
+        if (favorito) {
+
+
 
         }
 
