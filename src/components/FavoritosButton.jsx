@@ -1,34 +1,34 @@
 import { useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
 
 function FavoritosButton(props) {
     const [favorito, setFavorito] = useState(false);
     const API_URL = "http://localhost:5005";
-    const productId = props.id
-    // const token = localStorage.getItem('token');
-    // console.log("Token", token)
+    const productId = props.id;
+    const userId = '65144b54c1c43a8007e58352';
 
     const toggleFavorito = () => {
-
-        // aqui tenemos que llamar a la base de datos
         if (!favorito) {
+            // Agregar producto a favoritos
             axios
-                .get(`http://localhost:5005/profile/65144b54c1c43a8007e58352/favorites/add/${productId}`)
+                .get(`${API_URL}/profile/${userId}/favorites/add/${productId}`)
                 .then((response) => {
-                    console.log("response data  === " + response.data);
-                    // setProducts(response.data);
-
+                    console.log("Producto agregado a favoritos:", response.data);
                 })
-                .then(() => {
-                    console.log("producto agregado")
+                .catch((err) => console.log("EuserIdrror al agregar producto a favoritos:", err));
+        } else {
+            // Eliminar producto de favoritos
+
+            axios
+                .delete(`${API_URL}/profile/${userId}/favorites/remove`, { data: { productId } })
+                .then((response) => {
+                    // Actualiza los datos del usuario en el estado después de la eliminación
+                    // setProfileUser(response.data.user);
+                    console.log("producto quitado!!!")
                 })
-                .catch((err) => console.log("hay un error " + err));
-
-
-        }
-        if (favorito) {
-
-
+                .catch((error) => {
+                    console.error("Error al eliminar el producto de favoritos:", error);
+                });
 
         }
 
@@ -43,3 +43,4 @@ function FavoritosButton(props) {
 }
 
 export default FavoritosButton;
+
