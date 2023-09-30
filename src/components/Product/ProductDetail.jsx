@@ -12,7 +12,7 @@ function ProductDetail() {
     axios
       .get(`${API_URL}/product/${id}`)
       .then((ProductDetail) => {
-        console.log("Product Detail === " + ProductDetail.data);
+        // console.log("Product Detail === " + ProductDetail.data);
         setProduct(ProductDetail.data);
       })
       .catch((err) => console.log(err));

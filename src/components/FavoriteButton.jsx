@@ -1,32 +1,59 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
-function FavoriteButton({ productId, userId, onAddToFavorites }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+function FavoritosButton(props) {
+  const [favorito, setFavorito] = useState(false);
+  const action = favorito ? "remove" : "add";
+  const API_URL = "http://localhost:5005";
+  const productId = props.id;
+  const userId = "65144b54c1c43a8007e58352"; // ID de usuario (reemplaza con la autenticación real)
+  console.log("productId", productId);
 
-  const handleAddToFavorites = () => {
-    const apiUrl = `http://localhost:5005/profile/${userId}/favorites/add/${productId}`;
+  // Al cargar el componente, verifica si el producto ya está en favoritos del usuario
+  useEffect(() => {
+    // Verificar si el producto ya está en favoritos del usuario
+    axios
+      .get(`${API_URL}/profile/${userId}`)
+      .then((response) => {
+        const user = response.data; // Obtener el usuario de la respuesta
+        console.log("user " + JSON.stringify(user, null, 2));
+
+        user.favoriteProducts.forEach((product) => {
+          if (product._id === productId) {
+            setFavorito(true)
+          }
+        })
+
+        // if (user.favoriteProducts.includes(productId)) {
+        //   setFavorito(true);
+        // } else {
+        //   setFavorito(false); // Establecer como no favorito si no está en la lista
+        // }
+      })
+      .catch((err) => {
+        console.log("Error al verificar favoritos: " + err);
+      });
+  }, [productId, userId]);
+
+  const toggleFavorito = () => {
+    // Determina si debes agregar o eliminar el producto de favoritos
 
     axios
-      .post(apiUrl)
-      .then((response) => {
-        if (response.status === 200) {
-          setIsFavorite(true);
-          onAddToFavorites(productId);
-        } else {
-          // Manejo de errores
-        }
+      .post(`${API_URL}/profile/${userId}/favorites`, {
+        productId,
+        action,
       })
-      .catch((error) => {
-        // Manejo de errores
-      });
+      .then(() => {
+        setFavorito(!favorito);
+      })
+      .catch((err) => console.log("Error al actualizar favoritos: " + err));
   };
 
   return (
-    <button onClick={handleAddToFavorites}>
-      {isFavorite ? '❤️ Agregado a favoritos' : '🤍 Agregar a favoritos'}
+    <button className={`favoritos-button ${favorito ? 'favorito' : ''}`} onClick={toggleFavorito}>
+      {favorito ? '❤️ Quitar de favoritos' : '🤍 Agregar a favoritos'}
     </button>
   );
 }
 
-export default FavoriteButton;
+export default FavoritosButton;

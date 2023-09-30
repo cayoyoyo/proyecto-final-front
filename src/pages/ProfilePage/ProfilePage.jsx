@@ -6,8 +6,9 @@ import "./ProfilePage.css";
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
   const [profileUser, setProfileUser] = useState(null);
+  const [displayState, setDisplayState] = useState({}); // Estado para controlar la visibilidad de los productos
 
-  useEffect(() => {
+  function infoUser() {
     if (!isLoading) {
       const storedToken = localStorage.getItem("authToken");
 
@@ -17,27 +18,45 @@ function ProfilePage() {
       axios
         .get(apiUrl, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data)
           setProfileUser(response.data);
         })
         .catch((error) => {
           console.error("Error al obtener los datos del usuario:", error);
         });
     }
+
+  }
+
+  useEffect(() => {
+    infoUser()
   }, [user, isLoading]);
 
   const handleRemoveFavorite = (productId) => {
-    const apiUrl = `http://localhost:5005/profile/${profileUser._id}/favorites/remove`;
+    const apiUrl = `http://localhost:5005/profile/${profileUser._id}/favorites`;
 
     axios
-      .delete(apiUrl, { data: { productId } })
-      .then((response) => {
-        // Actualiza los datos del usuario en el estado después de la eliminación
-        setProfileUser(response.data.user);
+      .post(apiUrl, {
+        productId,
+        action: "remove"
+      })
+      .then(() => {
+        return axios.get(`http://localhost:5005/profile/${profileUser._id}/`)
+      })
+      .then((user) => {
+        setProfileUser(user.data)
+        console.log("user Test Axios ", user.data)
       })
       .catch((error) => {
         console.error("Error al eliminar el producto de favoritos:", error);
       });
+  };
+
+  const toggleDisplay = (productId) => {
+    setDisplayState((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId] // Invierte el estado del producto
+    }));
   };
 
   return (
@@ -47,15 +66,13 @@ function ProfilePage() {
       ) : profileUser ? (
         <div>
           <h2>Perfil de {profileUser.name}</h2>
-          <p>Nombre: {profileUser.name}</p>
-          <p>Email: {profileUser.email}</p>
-          <p>Ubicación: {profileUser.location || "No especificada"}</p>
-
-          {/* <h3>Productos Favoritos {profileUser.favoriteProducts}</h3> */}
-          <ul className="product-list">
+          {/* Otras partes del perfil */}
+          {/* ... */}
+          <h3 >Favoritos de {profileUser.name}</h3>
+          <ul className="product-list favUserUl">
             {profileUser.favoriteProducts &&
-            profileUser.favoriteProducts.length > 0 ? (
-              profileUser.favoriteProducts.map((product) => (
+              profileUser.favoriteProducts.length > 0 ? (
+              profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
                   <div className="product-card">
                     <div className="product-image">
@@ -65,16 +82,26 @@ function ProfilePage() {
                         <div>No hay imagen disponible</div>
                       )}
                     </div>
-                    <div className="product-details">
-                      <h3>{product.title}</h3>
-                      <p>{product.description}</p>
-                      <p>Precio: ${product.price}</p>
-                      <p>Condición: {product.condition}</p>
-                      <p>Disponible: {product.available ? "Sí" : "No"}</p>
-                      <p>
-                        Fecha de publicación:{" "}
-                        {new Date(product.publicationDate).toLocaleDateString()}
-                      </p>
+
+                    <h3>{product.title}</h3>
+                    <button
+                      className="addProducto"
+                      onClick={() => toggleDisplay(product._id)}
+                    >
+                      {displayState[product._id] ? "ver menos" : "ver mas"}
+                    </button>
+
+                    <div className={`product-details ${displayState[product._id] ? 'active' : ''}`}>
+                      <div>
+                        <p>{product.description}</p>
+                        <p>Precio: ${product.price}</p>
+                        <p>Condición: {product.condition}</p>
+                        <p>Disponible: {product.available ? "Sí" : "No"}</p>
+                        <p>
+                          Fecha de publicación:{" "}
+                          {new Date(product.publicationDate).toLocaleDateString()}
+                        </p>
+                      </div>
                       <button onClick={() => handleRemoveFavorite(product._id)}>
                         Eliminar de favoritos
                       </button>
@@ -95,3 +122,4 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
