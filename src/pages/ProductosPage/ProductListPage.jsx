@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductList from '../../components/Product/ProductLista';
+import ProductList from '../../components/ProductList/ProductList';
 
 function ProductosPage() {
   return (

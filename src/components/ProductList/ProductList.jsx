@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ProductForm from "./ProductForm";
+import ProductForm from "../ProductForm/ProductForm";
 import FavoriteButton from "../FavoriteButton";
 
 function ProductList() {

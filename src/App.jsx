@@ -14,6 +14,7 @@ import Chat from "./components/Chat/Chat";
 
 import ProductosPage from "./pages/ProductosPage/ProductListPage";
 import ProductosDetailPage from "./pages/ProductosPage/ProductDetailPage";
+import EditProductForm from "./components/EditProductForm/EditProductForm";
 
 function App() {
   return (
@@ -52,6 +53,8 @@ function App() {
 
         <Route path="/product" element={<ProductosPage />} />
         <Route path="/product/:id" element={<ProductosDetailPage />} />
+        <Route path="/product/:id/edit" element={<EditProductForm />} />
+
 
 
 
