@@ -24,11 +24,11 @@ function FavoritosButton(props) {
           }
         })
 
-        // if (user.favoriteProducts.includes(productId)) {
-        //   setFavorito(true);
-        // } else {
-        //   setFavorito(false); // Establecer como no favorito si no está en la lista
-        // }
+        if (user.favoriteProducts.includes(productId)) {
+          setFavorito(true);
+        } else {
+          setFavorito(false); // Establecer como no favorito si no está en la lista
+        }
       })
       .catch((err) => {
         console.log("Error al verificar favoritos: " + err);
