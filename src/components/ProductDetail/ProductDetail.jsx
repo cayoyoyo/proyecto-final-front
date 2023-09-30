@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import FavoritosButton from "../FavoriteButton";
+import "./ProductDetail.css";
+
+
 
 function ProductDetail() {
   const { id } = useParams();
@@ -37,6 +40,10 @@ function ProductDetail() {
               <p className="noDisponible">NO DISPONIBLE</p>
             )}
           </p>
+
+          <Link to={`/product/${id}/edit`}>
+            <button>Editar Producto</button>
+          </Link>
         </div>
 
         <div className="product-images">
