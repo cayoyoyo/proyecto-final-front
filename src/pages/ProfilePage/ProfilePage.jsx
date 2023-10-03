@@ -18,18 +18,17 @@ function ProfilePage() {
       axios
         .get(apiUrl, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then((response) => {
-          console.log(response.data)
+          console.log(response.data);
           setProfileUser(response.data);
         })
         .catch((error) => {
           console.error("Error al obtener los datos del usuario:", error);
         });
     }
-
   }
 
   useEffect(() => {
-    infoUser()
+    infoUser();
   }, [user, isLoading]);
 
   const handleRemoveFavorite = (productId) => {
@@ -38,14 +37,14 @@ function ProfilePage() {
     axios
       .post(apiUrl, {
         productId,
-        action: "remove"
+        action: "remove",
       })
       .then(() => {
-        return axios.get(`http://localhost:5005/profile/${profileUser._id}/`)
+        return axios.get(`http://localhost:5005/profile/${profileUser._id}/`);
       })
       .then((user) => {
-        setProfileUser(user.data)
-        console.log("user Test Axios ", user.data)
+        setProfileUser(user.data);
+        console.log("user Test Axios ", user.data);
       })
       .catch((error) => {
         console.error("Error al eliminar el producto de favoritos:", error);
@@ -55,7 +54,7 @@ function ProfilePage() {
   const toggleDisplay = (productId) => {
     setDisplayState((prevState) => ({
       ...prevState,
-      [productId]: !prevState[productId] // Invierte el estado del producto
+      [productId]: !prevState[productId], // Invierte el estado del producto
     }));
   };
 
@@ -68,10 +67,11 @@ function ProfilePage() {
           <h2>Perfil de {profileUser.name}</h2>
           {/* Otras partes del perfil */}
           {/* ... */}
-          <h3 >Favoritos de {profileUser.name}</h3>
+          <h3>Favoritos de {profileUser.name}</h3>
+          <h4>Location {profileUser.location}</h4>
           <ul className="product-list favUserUl">
             {profileUser.favoriteProducts &&
-              profileUser.favoriteProducts.length > 0 ? (
+            profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
                   <div className="product-card">
@@ -91,7 +91,11 @@ function ProfilePage() {
                       {displayState[product._id] ? "ver menos" : "ver mas"}
                     </button>
 
-                    <div className={`product-details ${displayState[product._id] ? 'active' : ''}`}>
+                    <div
+                      className={`product-details ${
+                        displayState[product._id] ? "active" : ""
+                      }`}
+                    >
                       <div>
                         <p>{product.description}</p>
                         <p>Precio: ${product.price}</p>
@@ -99,7 +103,9 @@ function ProfilePage() {
                         <p>Disponible: {product.available ? "Sí" : "No"}</p>
                         <p>
                           Fecha de publicación:{" "}
-                          {new Date(product.publicationDate).toLocaleDateString()}
+                          {new Date(
+                            product.publicationDate
+                          ).toLocaleDateString()}
                         </p>
                       </div>
                       <button onClick={() => handleRemoveFavorite(product._id)}>
@@ -122,4 +128,3 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
-
