@@ -45,28 +45,53 @@ function LoginPage() {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <div className="container my-5">
+    <div className="row justify-content-center">
+      <div className="col-lg-5 col-md-7 col-sm-9">
+        <h2 className="text-center mb-4">Login</h2>
+        <form onSubmit={handleLoginSubmit} className="p-4 border rounded">
+          <div className="form-floating mb-3">
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+              placeholder="Your email"
+              required
+            />
+            <label htmlFor="email">Email</label>
+          </div>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+          <div className="form-floating mb-3">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handlePassword}
+              placeholder="Your password"
+              required
+            />
+            <label htmlFor="password">Password</label>
+          </div>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+          {errorMessage && (
+            <p className="error error-message">{errorMessage}</p>
+          )}
+        </form>
+        <p>Don't have an account yet?</p>
+        <Link to={"/signup"}> Sign Up</Link>
+      </div>
     </div>
+  </div>
+
   );
 }
 

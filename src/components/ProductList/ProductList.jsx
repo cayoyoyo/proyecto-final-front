@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import FavoritosButton from "../FavoriteButton";
+import FavoritosButton from "../FavoriteButton/FavoriteButton";
 import ProductForm from "../ProductForm/ProductForm";
+import Searchbar from "../Searchbar/Searchbar";
 
 function ProductList() {
   const API_URL = "http://localhost:5005";
@@ -10,7 +11,6 @@ function ProductList() {
   const [products, setProducts] = useState([]);
   const [display, setDisplay] = useState("none");
 
-  // Cargar la lista de productos y su estado de favoritos al cargar la página
   useEffect(() => {
     axios
       .get(`${API_URL}/product`)
@@ -33,8 +33,20 @@ function ProductList() {
   };
 
   useEffect(() => {
-    fetchProducts(); // Carga la lista de productos cuando el componente se monta
+    fetchProducts();
   }, []);
+
+  // Función para realizar la búsqueda de productos
+  const handleSearch = (searchTerm) => {
+    axios
+      .get(`${API_URL}/product?term=${searchTerm}`)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al buscar productos:", error);
+      });
+  };
 
   return (
     <div className="pagProductos">
@@ -59,15 +71,19 @@ function ProductList() {
         <p>Categoria x </p>
         <p>Categoria y </p>
         <p>Categoria z </p>
-
-
       </div>
 
       <div className="listado">
+        <div className="searchbar">
+          <Searchbar onSearch={handleSearch} />
+        </div>
         <ul className="ulListaProdutos">
           {products.map((producto) => (
             <li className="liListaProdutos" key={producto._id}>
-              <FavoritosButton id={producto._id} favorito={producto.isFavorite} />
+              <FavoritosButton
+                id={producto._id}
+                favorito={producto.isFavorite}
+              />
               <img
                 className="product-image"
                 src={producto.images[0]}
@@ -83,7 +99,6 @@ function ProductList() {
           ))}
         </ul>
       </div>
-
     </div>
   );
 }

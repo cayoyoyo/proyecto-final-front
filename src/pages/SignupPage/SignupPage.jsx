@@ -2,12 +2,13 @@ import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-import axios from "axios";
+// import axios from "axios";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -15,11 +16,12 @@ function SignupPage() {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+  const handleLocation = (e) => setLocation(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, name, location };
 
     // Send a request to the server using axios
 
@@ -45,31 +47,128 @@ function SignupPage() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+      <div className="container my-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-7 col-sm-9">
+            <h2 className="text-center mb-4">Sign Up</h2>
+            <form onSubmit={handleSignupSubmit} className="p-4 border rounded">
+              <div className="form-floating mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={handleEmail}
+                  placeholder="Your email"
+                  required
+                />
+                <label htmlFor="email">Email</label>
+              </div>
+  
+              <div className="form-floating mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handlePassword}
+                  placeholder="Your password"
+                  required
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+  
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  value={name}
+                  onChange={handleName}
+                  placeholder="Your name"
+                  required
+                />
+                <label htmlFor="name">Name</label>
+              </div>
+  
+              <div className="form-floating mb-3">
+                <label htmlFor="location">Location (Provincia)</label>
+                <select
+                  name="location"
+                  id="location"
+                  value={location}
+                  onChange={handleLocation}
+                  className="form-control"
+                  required
+                >
+                  <option value=""></option>
+          <option value="Álava">Álava</option>
+          <option value="Albacete">Albacete</option>
+          <option value="Alicante">Alicante</option>
+          <option value="Almería">Almería</option>
+          <option value="Asturias">Asturias</option>
+          <option value="Ávila">Ávila</option>
+          <option value="Badajoz">Badajoz</option>
+          <option value="Barcelona">Barcelona</option>
+          <option value="Burgos">Burgos</option>
+          <option value="Cáceres">Cáceres</option>
+          <option value="Cádiz">Cádiz</option>
+          <option value="Cantabria">Cantabria</option>
+          <option value="Castellón">Castellón</option>
+          <option value="Ciudad Real">Ciudad Real</option>
+          <option value="Córdoba">Córdoba</option>
+          <option value="Cuenca">Cuenca</option>
+          <option value="Gerona">Gerona</option>
+          <option value="Granada">Granada</option>
+          <option value="Guadalajara">Guadalajara</option>
+          <option value="Guipúzcoa">Guipúzcoa</option>
+          <option value="Huelva">Huelva</option>
+          <option value="Huesca">Huesca</option>
+          <option value="Islas Balears">Islas Balears</option>
+          <option value="Jaén">Jaén</option>
+          <option value="La Coruña">La Coruña</option>
+          <option value="La Rioja">La Rioja</option>
+          <option value="Las Palmas">Las Palmas</option>
+          <option value="León">León</option>
+          <option value="Lérida">Lérida</option>
+          <option value="Lugo">Lugo</option>
+          <option value="Madrid">Madrid</option>
+          <option value="Málaga">Málaga</option>
+          <option value="Murcia">Murcia</option>
+          <option value="Navarra">Navarra</option>
+          <option value="Orense">Orense</option>
+          <option value="Palencia">Palencia</option>
+          <option value="Pontevedra">Pontevedra</option>
+          <option value="Salamanca">Salamanca</option>
+          <option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option>
+          <option value="Segovia">Segovia</option>
+          <option value="Sevilla">Sevilla</option>
+          <option value="Soria">Soria</option>
+          <option value="Tarragona">Tarragona</option>
+          <option value="Teruel">Teruel</option>
+          <option value="Toledo">Toledo</option>
+          <option value="Valencia">Valencia</option>
+          <option value="Valladolid">Valladolid</option>
+          <option value="Vizcaya">Vizcaya</option>
+          <option value="Zamora">Zamora</option>
+          <option value="Zaragoza">Zaragoza</option>
+        </select>
+        </div>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <button type="submit" className="btn btn-primary">
+              Sign Up
+            </button>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-
-        <button type="submit">Sign Up</button>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+            {errorMessage && (
+              <p className="error error-message">{errorMessage}</p>
+            )}
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

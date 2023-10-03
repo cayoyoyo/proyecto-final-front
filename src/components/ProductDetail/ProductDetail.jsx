@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import FavoritosButton from "../FavoriteButton";
+import FavoritosButton from "../FavoriteButton/FavoriteButton";
 import "./ProductDetail.css";
 
 

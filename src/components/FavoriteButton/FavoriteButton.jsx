@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 
 function FavoritosButton(props) {
   const [favorito, setFavorito] = useState(false);
