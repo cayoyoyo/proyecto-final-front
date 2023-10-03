@@ -70,20 +70,21 @@ function ProfilePage() {
           {/* ... */}
           <h3 >Favoritos de {profileUser.name}</h3>
           <ul className="product-list favUserUl">
+
             {profileUser.favoriteProducts &&
               profileUser.favoriteProducts.length > 0 ? (
-              profileUser.favoriteProducts.map((product, index) => (
+              profileUser.favoriteProducts.map((product) => (
                 <li key={product._id}>
-                  <div className="product-card">
-                    <div className="product-image">
+                  <div className="product-card ">
+                    <div className="product-image " >
                       {product.images && product.images.length > 0 ? (
-                        <img src={product.images[0]} alt={product.title} />
+                        <img className="profile-image" src={product.images[0]} alt={product.title} />
                       ) : (
                         <div>No hay imagen disponible</div>
                       )}
                     </div>
 
-                    <h3>{product.title}</h3>
+                    <p className="titleProducto">{product.title}</p>
                     <button
                       className="addProducto"
                       onClick={() => toggleDisplay(product._id)}

@@ -23,11 +23,13 @@ function ProductList() {
     return (
         <div>
             <h1>Lista de Productos</h1>
-            <ul className="ulListaProdutos">
-                {products.map((producto) => (
-                    <li className="liListaProdutos" key={producto._id}>
-                        <FavoritosButton id={producto._id} favorito={producto.isFavorite} />
 
+            <ul className="ulListaProdutos">
+
+                {products.map((producto) => (
+
+                    <li className="liListaProdutos" key={producto._id}>
+                        <FavoritosButton id={producto._id} />
                         <img
                             className="product-image"
                             src={producto.images[0]}
@@ -40,6 +42,7 @@ function ProductList() {
                             <button className="btnProducto">Ver más </button>
                         </Link>
                     </li>
+
                 ))}
             </ul>
         </div>

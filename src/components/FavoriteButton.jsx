@@ -1,45 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 function FavoritosButton(props) {
   const [favorito, setFavorito] = useState(false);
   const action = favorito ? "remove" : "add";
   const API_URL = "http://localhost:5005";
   const productId = props.id;
-  const userId = "65144b54c1c43a8007e58352"; // ID de usuario (reemplaza con la autenticación real)
-  console.log("productId", productId);
+  const { user, isLoading } = useContext(AuthContext);
 
-  // Al cargar el componente, verifica si el producto ya está en favoritos del usuario
+
+
   useEffect(() => {
-    // Verificar si el producto ya está en favoritos del usuario
-    axios
-      .get(`${API_URL}/profile/${userId}`)
-      .then((response) => {
-        const user = response.data; // Obtener el usuario de la respuesta
-        console.log("user " + JSON.stringify(user, null, 2));
 
-        user.favoriteProducts.forEach((product) => {
-          if (product._id === productId) {
-            setFavorito(true)
-          }
+    if (user && !isLoading) {
+
+      axios
+        .get(`${API_URL}/profile/${user._id}`)
+        .then((response) => {
+          const foundUser = response.data;
+          foundUser.favoriteProducts.forEach((product) => {
+            if (product._id === productId) {
+              setFavorito(true)
+            }
+          })
+
         })
-
-        if (user.favoriteProducts.includes(productId)) {
-          setFavorito(true);
-        } else {
-          setFavorito(false); // Establecer como no favorito si no está en la lista
-        }
-      })
-      .catch((err) => {
-        console.log("Error al verificar favoritos: " + err);
-      });
-  }, [productId, userId]);
+        .catch((err) => {
+          console.log("Error al verificar favoritos: " + err);
+        });
+    }
+  }, [productId, user]);
 
   const toggleFavorito = () => {
-    // Determina si debes agregar o eliminar el producto de favoritos
 
     axios
-      .post(`${API_URL}/profile/${userId}/favorites`, {
+      .post(`${API_URL}/profile/${user._id}/favorites`, {
         productId,
         action,
       })
@@ -51,7 +47,7 @@ function FavoritosButton(props) {
 
   return (
     <button className={`favoritos-button ${favorito ? 'favorito' : ''}`} onClick={toggleFavorito}>
-      {favorito ? '❤️ Quitar de favoritos' : '🤍 Agregar a favoritos'}
+      {favorito ? '❤️' : '🤍'}
     </button>
   );
 }

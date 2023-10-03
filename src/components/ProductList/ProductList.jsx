@@ -37,43 +37,53 @@ function ProductList() {
   }, []);
 
   return (
-    <div>
-      <h1>Lista de Productos</h1>
-      <button
-        className="addProducto"
-        onClick={() => {
-          if (display === "none") {
-            setDisplay("active");
-          } else {
-            setDisplay("none");
-          }
-        }}
-      >
-        New Product{" "}
-      </button>
+    <div className="pagProductos">
+      <div className="categoria">
+        <button
+          className="addProducto"
+          onClick={() => {
+            if (display === "none") {
+              setDisplay("active");
+            } else {
+              setDisplay("none");
+            }
+          }}
+        >
+          New Product{" "}
+        </button>
 
-      <div className={display}>
-        <ProductForm reloadProducts={fetchProducts} />
+        <div className={display}>
+          <ProductForm reloadProducts={fetchProducts} />
+        </div>
+
+        <p>Categoria x </p>
+        <p>Categoria y </p>
+        <p>Categoria z </p>
+
+
       </div>
 
-      <ul className="ulListaProdutos">
-        {products.map((producto) => (
-          <li className="liListaProdutos" key={producto._id}>
-            <FavoritosButton id={producto._id} favorito={producto.isFavorite} />
-            <img
-              className="product-image"
-              src={producto.images[0]}
-              alt={producto.title}
-            />
-            <p className="titleProducto">{producto.title}</p>
-            <p>€ {producto.price}</p>
+      <div className="listado">
+        <ul className="ulListaProdutos">
+          {products.map((producto) => (
+            <li className="liListaProdutos" key={producto._id}>
+              <FavoritosButton id={producto._id} favorito={producto.isFavorite} />
+              <img
+                className="product-image"
+                src={producto.images[0]}
+                alt={producto.title}
+              />
+              <p className="titleProducto">{producto.title}</p>
+              <p>€ {producto.price}</p>
 
-            <Link to={`/product/${producto._id}`}>
-              <button className="btnProducto">Ver más </button>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              <Link to={`/product/${producto._id}`}>
+                <button className="btnProducto">Ver más </button>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 }

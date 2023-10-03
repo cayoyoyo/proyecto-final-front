@@ -30,7 +30,8 @@ function ProductDetail() {
       <h2>Detalles del Producto</h2>
       <div className="divDetailProduct">
         <div className="detailTitle">
-          <FavoritosButton />
+          <FavoritosButton id={id} />
+
           <h2>{product.title}</h2>
           <p>{product.seller}</p>
           <p>

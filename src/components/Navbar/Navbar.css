@@ -1,0 +1,19 @@
+.navBar a {
+    margin: 5px;
+}
+
+.navBar span {
+    color: rgb(18, 17, 17);
+    background-color: #e4e4e4;
+    padding: 2px;
+    border: solid 1px black;
+    border-radius: 1px;
+}
+
+.navBar {
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgba(252, 255, 255, 0.377);
+}

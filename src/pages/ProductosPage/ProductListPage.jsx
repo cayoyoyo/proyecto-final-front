@@ -4,7 +4,7 @@ import ProductList from '../../components/ProductList/ProductList';
 function ProductosPage() {
   return (
     <div>
-      <div>ProductosPage</div>
+
       <ProductList />
 
     </div>

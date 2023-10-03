@@ -1,0 +1,14 @@
+.formProduct h1 {
+    font-size: 15px;
+}
+
+.formProduct {
+    font-size: 12px;
+
+}
+
+.formProduct input,
+label {
+    width: 30%;
+    display: flex;
+}
