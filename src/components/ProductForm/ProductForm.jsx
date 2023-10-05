@@ -9,6 +9,7 @@ function ProductForm(props) {
     description: "",
     price: 0,
     condition: "new",
+    category: "Electrodomésticos", // Valor predeterminado o la categoría que prefieras
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -52,6 +53,21 @@ function ProductForm(props) {
         console.error("Error al agregar un producto:", error);
       });
   };
+
+  // Lista de todas las categorías
+  const categories = [
+    "Electrodomésticos",
+    "Muebles",
+    "Electrónica",
+    "Ropa y Accesorios",
+    "Herramientas",
+    "Juguetes",
+    "Vehículos",
+    "Deportes y Fitness",
+    "Arte y Antigüedades",
+    "Libros y Revistas",
+    "Otros",
+  ];
 
   return (
     <div className="container mt-5">
@@ -116,6 +132,25 @@ function ProductForm(props) {
             </select>
           </div>
           <div className="mb-3">
+            <label htmlFor="category" className="form-label">
+              Categoría:
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="form-control"
+              id="category"
+              required
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-3">
             <label htmlFor="product-image" className="form-label">
               Imagen:
             </label>
@@ -137,8 +172,6 @@ function ProductForm(props) {
       </div>
     </div>
   );
-  
-  
 }
 
 export default ProductForm;

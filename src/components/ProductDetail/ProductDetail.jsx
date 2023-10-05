@@ -67,6 +67,8 @@ function ProductDetail() {
           </p>
           <strong>Descripción:</strong>
           <p> {product.description}</p>
+
+          <p><strong>Category:</strong> {product.category}</p>
         </div>
 
         <button>CHAT</button>
