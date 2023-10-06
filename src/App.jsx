@@ -51,9 +51,25 @@ function App() {
           }
         />
 
-        <Route path="/product" element={<ProductosPage />} />
-        <Route path="/product/:id" element={<ProductosDetailPage />} />
-        <Route path="/product/:id/edit" element={<EditProductForm />} />
+        <Route path="/product" element={
+          <IsPrivate>
+            <ProductosPage />
+          </IsPrivate>
+        } />
+
+        <Route path="/product/:id" element={
+          <IsPrivate>
+            <ProductosDetailPage />
+          </IsPrivate>
+
+        } />
+
+
+        <Route path="/product/:id/edit" element={
+          <IsPrivate>
+            <EditProductForm />
+          </IsPrivate>
+        } />
 
 
 

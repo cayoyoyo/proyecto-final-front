@@ -72,10 +72,13 @@ function ProfilePage() {
           <ul className="product-list favUserUl">
 
             {profileUser.favoriteProducts &&
-            profileUser.favoriteProducts.length > 0 ? (
+              profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
                   <div className="product-card ">
+                    <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
                     <div className="product-image " >
                       {product.images && product.images.length > 0 ? (
                         <img className="profile-image" src={product.images[0]} alt={product.title} />
@@ -93,9 +96,8 @@ function ProfilePage() {
                     </button>
 
                     <div
-                      className={`product-details ${
-                        displayState[product._id] ? "active" : ""
-                      }`}
+                      className={`product-details ${displayState[product._id] ? "active" : ""
+                        }`}
                     >
                       <div>
                         <p>{product.description}</p>
@@ -109,9 +111,7 @@ function ProfilePage() {
                           ).toLocaleDateString()}
                         </p>
                       </div>
-                      <button onClick={() => handleRemoveFavorite(product._id)}>
-                        Eliminar de favoritos
-                      </button>
+
                     </div>
                   </div>
                 </li>

@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./ProductForm.css";
+import { AuthContext } from "../../context/auth.context";
 
 function ProductForm(props) {
   const API_URL = "http://localhost:5005";
+  const { user, isLoading } = useContext(AuthContext);
+
+
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: 0,
     condition: "new",
+    seller: user._id,
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -137,8 +143,8 @@ function ProductForm(props) {
       </div>
     </div>
   );
-  
-  
+
+
 }
 
 export default ProductForm;

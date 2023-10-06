@@ -4,11 +4,17 @@
 
 .formProduct {
     font-size: 12px;
+    width: 140px;
+    max-width: 400px;
+    background-color: rgb(241 242 240);
+    padding: 16px;
+    border-radius: 11px;
+    border: inset 1px black;
 
 }
 
 .formProduct input,
 label {
-    width: 30%;
+
     display: flex;
 }

@@ -15,13 +15,16 @@
   margin: 10px;
   padding: 10px;
   width: 188px;
-  background: linear-gradient(to bottom, red, orange, yellow);
+  background: rgb(3 109 119 / 62%);
+  /* background: linear-gradient(to bottom, red, orange, yellow); */
   border: solid 1px black;
+  color: white;
+  font-size: 12px;
 }
 
 .product-image img {
 
-  height: 104px;
+  height: 70px;
 
 
   object-fit: contain;
@@ -40,10 +43,24 @@
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: #10ccdd9e;
 }
 
 /* Estilo para mostrar los detalles de los productos cuando están abiertos */
 .product-details.active {
   display: block;
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.bi-trash3-fill {
+  font-weight: bold !important;
+  font-size: 15px ! important;
+  color: rgb(185, 49, 49) !important;
+  margin-left: 151px;
 }

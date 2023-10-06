@@ -2,6 +2,8 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
+import 'font-awesome/css/font-awesome.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
@@ -11,10 +13,10 @@ function Navbar() {
   return (
     <nav className="navBar">
       <Link to="/">
-        <button>Home</button>
+        <button> <i className="fa fa-home"></i> </button>
       </Link>
       <Link to="/product">
-        <button>productos</button>
+        <button><i class="bi bi-shop"></i></button>
       </Link>
       {isLoggedIn && (
         <>

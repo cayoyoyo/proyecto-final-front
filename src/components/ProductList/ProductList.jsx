@@ -10,17 +10,9 @@ function ProductList() {
 
   const [products, setProducts] = useState([]);
   const [display, setDisplay] = useState("none");
+  const [response, setResponse] = useState(false)
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/product`)
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((err) =>
-        console.log("Error al cargar la lista de productos: " + err)
-      );
-  }, []);
+
 
   const fetchProducts = () => {
     axios
@@ -28,6 +20,7 @@ function ProductList() {
       .then((response) => {
         console.log("response === " + response.data);
         setProducts(response.data);
+        setResponse(true);
       })
       .catch((err) => console.log("hay un error " + err));
   };
@@ -48,8 +41,8 @@ function ProductList() {
       });
   };
 
-  return (
-    <div className="pagProductos">
+  return (<>
+    {response ? <div className="pagProductos">
       <div className="categoria">
         <button
           className="addProducto"
@@ -74,7 +67,7 @@ function ProductList() {
       </div>
 
       <div className="listado">
-        <div className="searchbar">
+        <div className="searchbar1">
           <Searchbar onSearch={handleSearch} />
         </div>
         <ul className="ulListaProdutos">
@@ -99,7 +92,7 @@ function ProductList() {
           ))}
         </ul>
       </div>
-    </div>
+    </div> : <p>Cargando...</p>}</>
   );
 }
 

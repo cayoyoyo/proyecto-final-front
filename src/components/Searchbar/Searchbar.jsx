@@ -13,12 +13,13 @@ function Searchbar({ onSearch }) {
   };
 
   return (
-    <div>
+    <div className="searchbar">
       <input
         type="text"
         value={searchTerm}
-        onChange={handleInputChange} 
+        onChange={handleInputChange}
         placeholder="Buscar productos"
+        className="searchbar-input"
       />
     </div>
   );
