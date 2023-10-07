@@ -12,6 +12,7 @@ function Navbar() {
 
   return (
     <nav className="navBar">
+    <span>{user && user.name}</span>
       <Link to="/">
         <button> <i className="fa fa-home"></i> </button>
       </Link>
@@ -20,14 +21,13 @@ function Navbar() {
       </Link>
       {isLoggedIn && (
         <>
-          <button onClick={logOutUser}>Logout</button>
 
           <Link to="/profile">
             <button>Profile</button>
             {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
           </Link>
 
-          <span>{user && user.name}</span>
+          <button onClick={logOutUser}>Logout</button>
         </>
       )}
 

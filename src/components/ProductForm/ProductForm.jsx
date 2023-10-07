@@ -55,14 +55,14 @@ function ProductForm(props) {
 
         props.reloadProducts();
 
-        // const productId = response.data.product._id; // ter o id do produto
-        // axios
-        //   .put(`${API_URL}/user/${user._id}/add-product/${productId}`)
-        //   .then((updateResponse) => {
-        //     console.log("Usuario actualizado con el nuevo producto:", updateResponse.data);
-        //     props.reloadProducts();
-        //     setDisplay("none");
-        //   })
+        const productId = response.data._id; // ter o id do produto
+        axios
+          .put(`${API_URL}/profile/${user._id}/add-product/${productId}`)
+          .then((updateResponse) => {
+            console.log("Usuario actualizado con el nuevo producto:", updateResponse.data);
+            props.reloadProducts();
+            setDisplay("none");
+          })
         setDisplay("none");
       })
       .catch((error) => {

@@ -41,7 +41,7 @@ function ProductDetail() {
             <FavoritosButton id={id} />
 
             <h2>{product.title}</h2>
-            <p>{product.seller.name}</p>
+            <p>subido por: {product.seller.name}</p>
 
             {product.available ? (
               <p className="disponible">DISPONIBLE</p>
@@ -82,6 +82,7 @@ function ProductDetail() {
           </p>
         </div>
         <button onClick={toggleChat}>CHAT</button>
+        {showChat && <Chat />}
 
         
         </div>

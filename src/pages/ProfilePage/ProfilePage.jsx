@@ -2,11 +2,13 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
+import EditProfile from "../../components/EditProfile/EditProfile"
 
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
   const [profileUser, setProfileUser] = useState(null);
   const [displayState, setDisplayState] = useState({}); // Estado para controlar la visibilidad de los productos
+  const [isEditing, setIsEditing] = useState(false);
 
   function infoUser() {
     if (!isLoading) {
@@ -58,6 +60,35 @@ function ProfilePage() {
     }));
   };
 
+  const handleEditProfile = () => {
+    setIsEditing(true);
+  };
+  
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+  
+  const handleSaveProfile = (formData) => {
+    const storedToken = localStorage.getItem("authToken");
+  
+    const userId = profileUser._id;
+    const apiUrl = `http://localhost:5005/profile/${userId}/edit-profile`;
+  
+    axios
+      .put(apiUrl, formData, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .then((response) => {
+        console.log("Perfil actualizado:", response.data);
+        setIsEditing(false);
+        infoUser();
+
+        // Puedes volver a cargar los datos del usuario actualizado si es necesario
+        // infoUser();
+      })
+      .catch((error) => {
+        console.error("Error al actualizar el perfil:", error);
+      });
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -65,12 +96,23 @@ function ProfilePage() {
       ) : profileUser ? (
         <div>
           <h2>Perfil de {profileUser.name}</h2>
-          {console.log("profileUser ===> ", profileUser)}
-          {/* ... */}
-
+          <img
+        src={profileUser.avatar}
+        alt={`Avatar de ${user.name}`}
+        style={{ width: '150px', height: '150px' }} // Establece el tamaño deseado
+      />
 
           <h5>Location: {profileUser.location}</h5>
           <h5>e-mail: {profileUser.email}</h5>
+          {isEditing ? (
+          <EditProfile
+            user={profileUser}
+            onSave={handleSaveProfile}
+            onCancel={handleCancelEdit}
+          />
+        ) : (
+          <>
+            <button onClick={handleEditProfile}>Editar Perfil</button>
 
           <h5>Favoritos:</h5>
           <ul className="product-list favUserUl">
@@ -168,6 +210,8 @@ function ProfilePage() {
               <li>No hay productos en venta</li>
             )}
           </ul>
+          </>
+        )}
         </div>
       ) : (
         <div>No se pudo cargar el perfil del usuario.</div>
