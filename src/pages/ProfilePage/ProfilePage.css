@@ -3,8 +3,9 @@
   list-style-type: none;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .product-card {
@@ -63,4 +64,10 @@
   font-size: 15px ! important;
   color: rgb(185, 49, 49) !important;
   margin-left: 151px;
+}
+
+.sticky-product {
+  margin-left: 850px;
+
+  /* background-color: #fff; */
 }

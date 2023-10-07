@@ -37,7 +37,7 @@ function ProductDetail() {
             <FavoritosButton id={id} />
 
             <h2>{product.title}</h2>
-            <p>{product.seller}</p>
+            <p>{product.seller.name}</p>
 
             {product.available ? (
               <p className="disponible">DISPONIBLE</p>

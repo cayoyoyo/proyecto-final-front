@@ -65,17 +65,22 @@ function ProfilePage() {
       ) : profileUser ? (
         <div>
           <h2>Perfil de {profileUser.name}</h2>
-          {/* Otras partes del perfil */}
+          {console.log("profileUser ===> ", profileUser)}
           {/* ... */}
-          <h3>Favoritos de {profileUser.name}</h3>
-          <h4>Location {profileUser.location}</h4>
+
+
+          <h5>Location: {profileUser.location}</h5>
+          <h5>e-mail: {profileUser.email}</h5>
+
+          <h5>Favoritos:</h5>
           <ul className="product-list favUserUl">
 
             {profileUser.favoriteProducts &&
               profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
-                  <div className="product-card ">
+                  <div className={`product-card ${index === 0 ? "sticky-product" : ""
+                    }`}>
                     <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
                       <i class="bi bi-trash3-fill"></i>
                     </button>
@@ -118,6 +123,49 @@ function ProfilePage() {
               ))
             ) : (
               <li>No hay productos favoritos</li>
+            )}
+          </ul>
+          <h5>Productos en Venta:</h5>
+          <ul className="product-list">
+            {profileUser.productsForSale &&
+              profileUser.productsForSale.length > 0 ? (
+              profileUser.productsForSale.map((product, index) => (
+                <li key={product._id}>
+                  <div className="product-card">
+                    <div className="product-image">
+                      {product.images && product.images.length > 0 ? (
+                        <img
+                          className="profile-image"
+                          src={product.images[0]}
+                          alt={product.title}
+                        />
+                      ) : (
+                        <div>No hay imagen disponible</div>
+                      )}
+                    </div>
+                    <p className="titleProducto">{product.title}</p>
+                    <button
+                      className="toggle-product-details"
+                      onClick={() => toggleDisplay(product._id)}
+                    >
+                      {displayState[product._id] ? "Ver menos" : "Ver más"}
+                    </button>
+                    <div
+                      className={`product-details ${displayState[product._id] ? "active" : ""
+                        }`}
+                    >
+                      <p>Descripción: {product.description}</p>
+                      <p>Precio: ${product.price}</p>
+                      <p>Condición: {product.condition}</p>
+                      <p>
+                        Disponible: {product.available ? "Sí" : "No"}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <li>No hay productos en venta</li>
             )}
           </ul>
         </div>

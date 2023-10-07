@@ -8,14 +8,16 @@ import FavoritosButton from "../FavoriteButton";
 function ProductList() {
     const API_URL = "http://localhost:5005";
 
-    const [products, setProducts] = useState([]);
+    const [productsData, setProductsData] = useState([]);
+    const products = productsData.reverse();
+
 
     // Cargar la lista de productos y su estado de favoritos al cargar la página
     useEffect(() => {
         axios
             .get(`${API_URL}/product`)
             .then((response) => {
-                setProducts(response.data);
+                setProductsData(response.data);
             })
             .catch((err) => console.log("Error al cargar la lista de productos: " + err));
     }, []);

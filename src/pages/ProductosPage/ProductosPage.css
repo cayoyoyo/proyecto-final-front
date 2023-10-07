@@ -77,7 +77,7 @@
     padding: 10px;
     margin-right: 10px;
     width: max-content;
-    margin-top: 120px;
+    margin-top: 15px;
 }
 
 .detailText p {
@@ -105,11 +105,13 @@
 .product-images {
     display: flex;
     justify-content: center;
+    margin-top: 70px
 }
 
 .images-individual {
     width: 150px;
     object-fit: contain;
+    margin: 5px;
 }
 
 .none {
