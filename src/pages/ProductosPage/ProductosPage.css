@@ -163,4 +163,5 @@
 .titleProducto {
     overflow: hidden;
     height: 27px;
+    margin: 0;
 }

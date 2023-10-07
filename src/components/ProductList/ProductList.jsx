@@ -18,7 +18,7 @@ function ProductList() {
     axios
       .get(`${API_URL}/product`)
       .then((response) => {
-        console.log("response === " + response.data);
+        // console.log("response === " + response.data);
         setProducts(response.data);
         setResponse(true);
       })

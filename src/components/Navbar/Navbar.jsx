@@ -15,21 +15,11 @@ function Navbar() {
       <Link to="/">
         <button> <i className="fa fa-home"></i> </button>
       </Link>
+
       <Link to="/product">
-        <button><i class="bi bi-shop"></i></button>
+        <button><i class="bi bi-shop"></i> Producto</button>
       </Link>
-      {isLoggedIn && (
-        <>
-          <button onClick={logOutUser}>Logout</button>
 
-          <Link to="/profile">
-            <button>Profile</button>
-            {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
-          </Link>
-
-          <span>{user && user.name}</span>
-        </>
-      )}
 
       {!isLoggedIn && (
         <>
@@ -41,6 +31,19 @@ function Navbar() {
             {" "}
             <button>Login</button>{" "}
           </Link>
+        </>
+      )}
+
+      {isLoggedIn && (
+        <>
+          <button onClick={logOutUser}>Logout</button>
+
+          <Link to="/profile">
+            <button>Profile</button>
+            {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
+          </Link>
+
+          <span>{user && user.name}</span>
         </>
       )}
     </nav>
