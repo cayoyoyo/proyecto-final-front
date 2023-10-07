@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import FavoritosButton from "../FavoriteButton/FavoriteButton";
+import Chat from "../Chat/Chat";
 import "./ProductDetail.css";
-
-
 
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [showChat, setShowChat] = useState(false);
   const API_URL = "http://localhost:5005";
   const [response, setResponse] = useState(false)
 
@@ -27,6 +27,10 @@ function ProductDetail() {
   // if (!product) {
   //   return <div>Cargando...</div>;
   // }
+
+  const toggleChat = () => {
+    setShowChat(!showChat);
+  };
 
   return (
     <>
@@ -73,10 +77,15 @@ function ProductDetail() {
             <strong>Descripción:</strong>
             <p> {product.description}</p>
           </div>
-
-          <button> CHAT</button>
+          <p>
+            <strong>Category:</strong> {product.category}
+          </p>
         </div>
-      </div>
+        <button onClick={toggleChat}>CHAT</button>
+
+        
+        </div>
+
         : <p>Cargando...</p>}
     </>
   );
