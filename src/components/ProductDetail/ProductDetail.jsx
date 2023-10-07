@@ -28,12 +28,12 @@ function ProductDetail() {
         setProduct(ProductDetail.data);
         setUser2Id(ProductDetail.data.seller._id)
         setResponse(true);
-
+        return ProductDetail.data.seller._id
       })
-      .then(() => {
+      .then((user2) => {
 
         axios
-          .get(`http://localhost:5005/profile/${user2Id}`)
+          .get(`http://localhost:5005/profile/${user2}`)
           .then((response) => {
             console.log("setuser2 ", response.data);
             setuser2(response.data);
@@ -43,15 +43,10 @@ function ProductDetail() {
       .catch((err) => console.log(err));
 
 
-
-
-
-
-
-
   }, [id]);
 
   const toggleChat = () => {
+
     setShowChat(!showChat);
   };
 
