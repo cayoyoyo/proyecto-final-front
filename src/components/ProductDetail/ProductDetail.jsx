@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -18,40 +17,35 @@ function ProductDetail() {
 
   // Agrega una variable de usuario actual (debes obtener esta información de tu sistema de autenticación)
 
-
   const API_URL = "http://localhost:5005";
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/product/${id}`)
-      .then((ProductDetail) => {
-        setProduct(ProductDetail.data);
-        setUser2Id(ProductDetail.data.seller._id)
-        setResponse(true);
+    .get(`${API_URL}/product/${id}`)
+    .then((ProductDetail) => {
+      setProduct(ProductDetail.data);
+      setUser2Id(ProductDetail.data.seller._id)
+      setResponse(true);
+      return ProductDetail.data.seller._id
+    })
+    .then((user2) => {
 
-      })
-      .then(() => {
+      axios
+        .get(`http://localhost:5005/profile/${user2}`)
+        .then((response) => {
+          console.log("setuser2 ", response.data);
+          setuser2(response.data);
+        })
 
-        axios
-          .get(`http://localhost:5005/profile/${user2Id}`)
-          .then((response) => {
-            console.log("setuser2 ", response.data);
-            setuser2(response.data);
-          })
-
-      })
-      .catch((err) => console.log(err));
-
-
-
-
-
-
-
-
+    })
+    .catch((err) => console.log(err));
   }, [id]);
 
   const toggleChat = () => {
+    axios.get(`http://localhost:5005/profile/${user2Id}`).then((response) => {
+      console.log("setuser2 ", response.data);
+      setuser2(response.data);
+    });
     setShowChat(!showChat);
   };
 
@@ -73,7 +67,6 @@ function ProductDetail() {
                 <p className="noDisponible">NO DISPONIBLE</p>
               )}
 
-
               <Link to={`/product/${id}/edit`}>
                 <button>Editar Producto</button>
               </Link>
@@ -81,13 +74,14 @@ function ProductDetail() {
 
             <div className="product-images">
               {product.images.map((image, index) => (
-                <div key={index} className="images-individual" >
+                <div key={index} className="images-individual">
                   <img
                     key={index}
                     src={image}
                     alt={`Imagen ${index + 1} de productos`}
                     className="product-image"
-                  /></div>
+                  />
+                </div>
               ))}
             </div>
 
@@ -122,4 +116,3 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
-
