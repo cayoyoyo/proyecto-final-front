@@ -25,3 +25,7 @@ body {
   background-image: url("https://res.cloudinary.com/dzau21or3/image/upload/v1696098482/products…");
   background-attachment: fixed;
 }
+
+main {
+  margin-top: 50px;
+}

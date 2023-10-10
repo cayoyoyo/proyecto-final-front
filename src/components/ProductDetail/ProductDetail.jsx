@@ -107,7 +107,7 @@ function ProductDetail() {
           </button>
 
           {/* Renderiza el componente Chat si showChat es true */}
-          {showChat && <Chat vendedor={user2} />}
+          {/* {showChat && <Chat vendedor={user2} />} */}
         </div>
       ) : (
         <p>Cargando...</p>

@@ -3,11 +3,11 @@ import ProductList from '../../components/ProductList/ProductList';
 
 function ProductosPage() {
   return (
-    <div>
+    <main>
 
       <ProductList />
 
-    </div>
+    </main>
   )
 }
 

@@ -20,7 +20,7 @@ function ProductList() {
       .then((response) => {
         // console.log("response === " + response.data);
         setProducts(response.data);
-        setResponse(true);
+        setResponse(true); // para probar el loading button 
       })
       .catch((err) => console.log("hay un error " + err));
   };
@@ -64,6 +64,7 @@ function ProductList() {
         <p>Categoria x </p>
         <p>Categoria y </p>
         <p>Categoria z </p>
+
       </div>
 
       <div className="listado">
@@ -92,7 +93,13 @@ function ProductList() {
           ))}
         </ul>
       </div>
-    </div> : <p>Cargando...</p>}</>
+    </div> : <div class="d-flex gap-2 justify-content-center py-5">
+
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+      </button>
+    </div>}</>
   );
 }
 

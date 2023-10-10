@@ -16,6 +16,10 @@ import ProductosPage from "./pages/ProductosPage/ProductListPage";
 import ProductosDetailPage from "./pages/ProductosPage/ProductDetailPage";
 import EditProductForm from "./components/EditProductForm/EditProductForm";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+
 function App() {
   return (
     <div className="App">
@@ -75,6 +79,8 @@ function App() {
 
 
       </Routes>
+
+
     </div>
   );
 }
