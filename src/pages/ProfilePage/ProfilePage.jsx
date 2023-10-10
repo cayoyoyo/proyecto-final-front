@@ -214,7 +214,7 @@ function ProfilePage() {
         )}
         </div>
       ) : (
-        <div>No se pudo cargar el perfil del usuario.</div>
+        <div>Loading...</div>
       )}
     </div>
   );

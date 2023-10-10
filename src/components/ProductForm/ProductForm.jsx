@@ -15,7 +15,7 @@ function ProductForm(props) {
     price: 0,
     condition: "new",
     seller: user._id,
-    category: "", 
+    category: "",
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
