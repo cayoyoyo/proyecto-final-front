@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
@@ -79,8 +80,7 @@ function ProfilePage() {
               profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
-                  <div className={`product-card ${index === 0 ? "sticky-product" : ""
-                    }`}>
+                  <div className={`product-card ${index === 0 ? "sticky-product" : ""}`}>
                     <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
                       <i class="bi bi-trash3-fill"></i>
                     </button>
@@ -97,13 +97,15 @@ function ProfilePage() {
                       className="addProducto"
                       onClick={() => toggleDisplay(product._id)}
                     >
-                      {displayState[product._id] ? "ver menos" : "ver mas"}
+                      {displayState[product._id] ? "ver mas" : "ver mas"}
                     </button>
 
-                    <div
+                    {/* <div
                       className={`product-details ${displayState[product._id] ? "active" : ""
                         }`}
-                    >
+                    > */}
+                    <div className={`product-details ${displayState[product._id] ? "active overlay" : ""}`}>
+
                       <div>
                         <p>{product.description}</p>
                         <p>Precio: ${product.price}</p>
@@ -115,6 +117,12 @@ function ProfilePage() {
                             product.publicationDate
                           ).toLocaleDateString()}
                         </p>
+                        <button
+                          className="addProducto"
+                          onClick={() => toggleDisplay(product._id)}
+                        >
+                          {displayState[product._id] ? "ver menos" : ""}
+                        </button>
                       </div>
 
                     </div>
@@ -125,6 +133,8 @@ function ProfilePage() {
               <li>No hay productos favoritos</li>
             )}
           </ul>
+
+
           <h5>Productos en Venta:</h5>
           <ul className="product-list">
             {profileUser.productsForSale &&
@@ -132,6 +142,9 @@ function ProfilePage() {
               profileUser.productsForSale.map((product, index) => (
                 <li key={product._id}>
                   <div className="product-card">
+                    <Link to={`/product/${product._id}/edit`}>
+                      <button className="editProductPerfil"><i class="bi bi-pencil-square btn-profile-edit"></i></button>
+                    </Link>
                     <div className="product-image">
                       {product.images && product.images.length > 0 ? (
                         <img
@@ -148,7 +161,7 @@ function ProfilePage() {
                       className="toggle-product-details"
                       onClick={() => toggleDisplay(product._id)}
                     >
-                      {displayState[product._id] ? "Ver menos" : "Ver más"}
+                      {displayState[product._id] ? "Detalles -" : "Detalles +"}
                     </button>
                     <div
                       className={`product-details ${displayState[product._id] ? "active" : ""
