@@ -24,10 +24,7 @@
 }
 
 .product-image img {
-
   height: 70px;
-
-
   object-fit: contain;
 }
 
@@ -50,6 +47,7 @@
 /* Estilo para mostrar los detalles de los productos cuando están abiertos */
 .product-details.active {
   display: block;
+  color: #157980;
 }
 
 .btn-delete {
@@ -66,8 +64,29 @@
   margin-left: 151px;
 }
 
-.sticky-product {
-  /* margin-left: 850px; */
+.editProductPerfil {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 
-  /* background-color: #fff; */
+}
+
+.btn-profile-edit {
+  margin-left: -135px;
+  font-size: 15px;
+}
+
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  z-index: 9999;
+  /* Asegura que se superponga sobre otros elementos */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  max-width: 80%;
+  /* Ajusta el ancho máximo según tus preferencias */
 }
