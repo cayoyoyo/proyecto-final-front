@@ -1,43 +1,65 @@
-import Talk from "talkjs";
-import { useEffect, useState, useRef, useContext } from "react";
+import Talk from 'talkjs';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
+
 
 function MyChatComponent(props) {
   const chatboxEl = useRef();
   const { user, isLoggedIn } = useContext(AuthContext);
 
-  const user2 = props.vendedor;
+  const user2 = props.vendedor
+
+
+
+
 
   // wait for TalkJS to load
   const [talkLoaded, markTalkLoaded] = useState(false);
 
   useEffect(() => {
-    Talk.ready.then(() => {
-      setTalkLoaded(true);
-    });
+    Talk.ready.then(() => markTalkLoaded(true));
 
-    if (talkLoaded && user) {
+
+
+    if (talkLoaded && isLoggedIn) {
       const currentUser = new Talk.User({
-        id: user._id, // Reemplaza esto con el campo correcto que contiene el ID del usuario en tu objeto 'user'
-        name: user.name, // Reemplaza esto con el campo correcto que contiene el nombre del usuario en tu objeto 'user'
-        email: user.email, // Reemplaza esto con el campo correcto que contiene el correo electrónico del usuario en tu objeto 'user'
-        photoUrl: user.avatar, // Reemplaza esto con el campo correcto que contiene la URL de la foto del usuario en tu objeto 'user'
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        photoUrl: 'henry.jpeg',
         welcomeMessage: 'Hello!',
-        role: "default"
+        role: 'default',
+      });
+
+      const otherUser = new Talk.User({
+        id: user2._id,
+        name: user2.name,
+        email: user2.email,
+        photoUrl: 'jessica.jpeg',
+        welcomeMessage: 'Hello!',
+        role: 'default',
       });
 
       const session = new Talk.Session({
-        appId: process.env.REACT_APP_TALKJS_APP_ID, // Reemplaza 'YOUR_APP_ID' con la variable de entorno correcta que contiene tu ID de la aplicación Talk.js
-        me: currentUser
+        appId: 'tfLfNCYY',
+        me: currentUser,
       });
 
+      const conversationId = Talk.oneOnOneId(currentUser, otherUser);
+      const conversation = session.getOrCreateConversation(conversationId);
+      conversation.setParticipant(currentUser);
+      conversation.setParticipant(otherUser);
+
       const chatbox = session.createChatbox();
-      chatbox.mount(chatboxDiv.current);
+      chatbox.select(conversation);
+      chatbox.mount(chatboxEl.current);
 
       return () => session.destroy();
     }
-  }, [talkLoaded, user]);
+  }, [talkLoaded]);
 
-  return <div className="chat" ref={chatboxDiv} />;
+  return <div className='divChat' ref={chatboxEl} />;
 }
+
+export default MyChatComponent;
