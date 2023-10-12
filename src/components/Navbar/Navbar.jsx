@@ -89,7 +89,15 @@ function Navbar() {
               </Link>
             </form>
           )}
+          <div className="right-nav-items">
 
+            <li>
+              <Link to="/inbox">
+                <b><span><img id="my-messages-icon" src={process.env.PUBLIC_URL + '/assets/images/icons/my-messages.png'} /></span> My Messages</b>
+              </Link>
+            </li>
+
+          </div>
         </div>
       </div>
     </nav >

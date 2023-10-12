@@ -1,4 +1,5 @@
 import "./HomePage.css";
+import InboxPage from "../chatBox";
 
 function HomePage() {
   return (
@@ -61,6 +62,7 @@ function HomePage() {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+
     </main>
   );
 }

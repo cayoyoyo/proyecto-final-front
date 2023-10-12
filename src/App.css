@@ -29,3 +29,7 @@ body {
 main {
   margin-top: 50px;
 }
+
+#inbox-container {
+  height: 40vw;
+}
