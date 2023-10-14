@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'YoungSerif';
+  src: url('../fonts/YoungSerif-Regular.ttf') format('truetype');
+}
+
+
+
 .App {
   text-align: center;
   position: relative;
@@ -7,10 +14,10 @@
 
 .App::before {
   content: "";
-  background-image: url('https://i.pinimg.com/564x/5e/a8/56/5ea856111da343eab5b148576430a109.jpg');
+  background-image: url('../public/fondo.jpg');
   background-color: rgba(255, 255, 255, 0.3);
 
-  opacity: 0.2;
+  opacity: 0.9;
 
   position: absolute;
   top: 0;
@@ -24,4 +31,9 @@
 body {
   background-image: url("https://res.cloudinary.com/dzau21or3/image/upload/v1696098482/products…");
   background-attachment: fixed;
+  font-family: 'YoungSerif', sans-serif;
+}
+
+main {
+  margin-top: 50px;
 }

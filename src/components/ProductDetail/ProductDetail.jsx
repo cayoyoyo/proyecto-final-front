@@ -21,31 +21,30 @@ function ProductDetail() {
 
   useEffect(() => {
     axios
-    .get(`${API_URL}/product/${id}`)
-    .then((ProductDetail) => {
-      setProduct(ProductDetail.data);
-      setUser2Id(ProductDetail.data.seller._id)
-      setResponse(true);
-      return ProductDetail.data.seller._id
-    })
-    .then((user2) => {
+      .get(`${API_URL}/product/${id}`)
+      .then((ProductDetail) => {
+        setProduct(ProductDetail.data);
+        setUser2Id(ProductDetail.data.seller._id)
+        setResponse(true);
+        return ProductDetail.data.seller._id
+      })
+      .then((user2) => {
 
-      axios
-        .get(`http://localhost:5005/profile/${user2}`)
-        .then((response) => {
-          console.log("setuser2 ", response.data);
-          setuser2(response.data);
-        })
+        axios
+          .get(`http://localhost:5005/profile/${user2}`)
+          .then((response) => {
+            console.log("setuser2 ", response.data);
+            setuser2(response.data);
+          })
 
-    })
-    .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+
+
   }, [id]);
 
   const toggleChat = () => {
-    axios.get(`http://localhost:5005/profile/${user2Id}`).then((response) => {
-      console.log("setuser2 ", response.data);
-      setuser2(response.data);
-    });
+
     setShowChat(!showChat);
   };
 

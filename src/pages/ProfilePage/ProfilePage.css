@@ -1,55 +1,67 @@
-/* En tu archivo CSS o en el componente */
+/* En tu archivo ProfilePage.css */
+.profile {
+  display: flex; /* Establece el contenedor principal como flex */
+  align-items: flex-start; /* Alinea los elementos en la parte superior del contenedor */
+  margin-top: 60px;
+
+}
+
+.card {
+  flex: 1; /* La card toma todo el espacio disponible */
+  margin-right: 20px; /* Agrega un margen entre la card y las listas */
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
 .product-list {
   list-style-type: none;
   padding: 0;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  overflow-y: scroll;
+  flex-direction: column;
+  flex: 1; /* Las listas ocupan el espacio disponible verticalmente */
+  overflow-y: scroll; /* Agrega una barra de desplazamiento vertical si es necesario */
+  max-height: 70vh; /* Apila los elementos en columnas */
 }
 
+
+
 .product-card {
+  transition: transform 0.3s, opacity 0.3s;
+  transform: translateX(0);
+  opacity: 1;
   display: inline-block;
   vertical-align: top;
   flex-direction: row;
   border: 1px solid #ccc;
   margin: 10px;
   padding: 10px;
-  width: 188px;
+  width: 308px;
   background: rgb(3 109 119 / 62%);
-  /* background: linear-gradient(to bottom, red, orange, yellow); */
-  border: solid 1px black;
   color: white;
   font-size: 12px;
 }
 
 .product-image img {
-
   height: 70px;
-
-
   object-fit: contain;
 }
 
 .product-details {
-  display: block;
   text-align: left;
-}
-
-/* Agrega este CSS en tu archivo ProfilePage.css */
-
-/* Estilo para ocultar inicialmente los detalles de los productos */
-.product-details {
   display: none;
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #10ccdd9e;
+  transition: display 0.3s;
 }
+
+
 
 /* Estilo para mostrar los detalles de los productos cuando están abiertos */
 .product-details.active {
   display: block;
+  color: #157980;
 }
 
 .btn-delete {
@@ -66,8 +78,60 @@
   margin-left: 151px;
 }
 
-.sticky-product {
-  /* margin-left: 850px; */
+.editProductPerfil {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 
-  /* background-color: #fff; */
 }
+
+.btn-profile-edit {
+  margin-left: -135px;
+  font-size: 15px;
+}
+
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  z-index: 9999;
+  /* Asegura que se superponga sobre otros elementos */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  max-width: 80%;
+  /* Ajusta el ancho máximo según tus preferencias */
+}
+
+.toggle-product-details {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #007BFF; /* Color azul o el que prefieras */
+}
+
+.toggle-product-details.active {
+  color: #10ccdd; /* Cambia el color cuando está activo */
+}
+
+.product-card:hover {
+  background: rgba(3, 109, 119, 0.8); /* Cambia el fondo al pasar el ratón */
+  transition: background 0.3s; /* Agregar una transición suave */
+}
+
+
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column; /* Cambia la dirección de flex a columna */
+    align-items: center; /* Centra los elementos verticalmente */
+  }
+
+  .card {
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    margin: 0; /* Elimina los márgenes para ocupar todo el ancho */
+  }
+}
+

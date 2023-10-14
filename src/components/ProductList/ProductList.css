@@ -1,3 +1,28 @@
 .addProduct {
     margin-bottom: 50px;
 }
+
+/* Estilos para las categorías */
+.categorias {
+    display: flex;
+    flex-direction: column; /* Mostrar las categorías una debajo de la otra */
+    margin-bottom: 20px;
+  }
+  
+  span {
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    display: block; /* Hacer que cada categoría ocupe una línea completa */
+  }
+  
+/* Estilo para la categoría seleccionada */
+span:focus {
+    background-color: #007bff; /* Color de fondo personalizable */
+    color: #fff; /* Color del texto personalizable */
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 30px;
+  }
+  

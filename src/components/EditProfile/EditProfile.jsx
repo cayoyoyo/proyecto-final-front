@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios"; // Importa Axios
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 function EditProfile({ user, onSave, onCancel }) {
   const [formData, setFormData] = useState({
@@ -9,7 +12,6 @@ function EditProfile({ user, onSave, onCancel }) {
   });
 
   const [previewImage, setPreviewImage] = useState(user.profileImageUrl || null);
-
 
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
@@ -48,11 +50,12 @@ function EditProfile({ user, onSave, onCancel }) {
 
     // Realiza la solicitud con Axios
     axios
-      .put(`/profile/${user._id}/edit-profile`, formDataToSend)
+      .put(`http://localhost:5005/profile/${user._id}/edit-profile`, formDataToSend)
       .then((response) => {
         // Verifica si la respuesta es exitosa
         if (response.status === 200) {
           console.log("Perfil actualizado con éxito");
+          setPreviewImage(response.data.avatar);
         } else {
           // El servidor respondió con un error, puedes manejarlo aquí
           console.error("Error al actualizar el perfil:", response.data);
@@ -120,22 +123,23 @@ function EditProfile({ user, onSave, onCancel }) {
   ];
 
   return (
-    <div>
+    <Container>
       <h3>Editar perfil</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Nombre:</label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Nombre:</Form.Label>
+          <Form.Control
             type="text"
             id="name"
             name="name"
             value={formData.name}
             onChange={handleLocationChange}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="location">Ubicación:</label>
-          <select
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Ubicación:</Form.Label>
+          <Form.Control
+            as="select"
             name="location"
             id="location"
             value={formData.location}
@@ -147,11 +151,11 @@ function EditProfile({ user, onSave, onCancel }) {
                 {option}
               </option>
             ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="profile-photo">Foto de perfil:</label>
-          <input
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Foto de perfil:</Form.Label>
+          <Form.Control
             type="file"
             id="profile-photo"
             name="profile-photo"
@@ -165,14 +169,13 @@ function EditProfile({ user, onSave, onCancel }) {
               style={{ maxWidth: "200px", marginTop: "10px" }}
             />
           )}
-        </div>
-        {/* Agrega más campos según sea necesario */}
-        <button type="submit">Guardar</button>
-        <button type="button" onClick={onCancel}>
+        </Form.Group>
+        <Button type="submit">Guardar</Button>
+        <Button type="button" onClick={onCancel}>
           Cancelar
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 }
 

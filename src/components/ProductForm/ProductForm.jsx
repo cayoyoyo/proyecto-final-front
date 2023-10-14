@@ -7,15 +7,13 @@ function ProductForm(props) {
   const API_URL = "http://localhost:5005";
   const { user, isLoading } = useContext(AuthContext);
 
-
-
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: 0,
-    condition: "new",
+    condition: "used",
     seller: user._id,
-    category: "",
+    category: "Otros",
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -29,9 +27,18 @@ function ProductForm(props) {
     });
   };
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
+
+    // Mostrar la vista previa de la imagen
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = (e) => {
@@ -59,10 +66,13 @@ function ProductForm(props) {
         axios
           .put(`${API_URL}/profile/${user._id}/add-product/${productId}`)
           .then((updateResponse) => {
-            console.log("Usuario actualizado con el nuevo producto:", updateResponse.data);
+            console.log(
+              "Usuario actualizado con el nuevo producto:",
+              updateResponse.data
+            );
             props.reloadProducts();
             setDisplay("none");
-          })
+          });
         setDisplay("none");
       })
       .catch((error) => {
@@ -87,7 +97,7 @@ function ProductForm(props) {
 
   return (
     <div className="container mt-5">
-      <div className={`formProduct ${display}`} style={{ maxWidth: '400px' }}>
+      <div className={`formProduct ${display}`} style={{ maxWidth: "400px" }}>
         <h1>Formulario de Producto</h1>
         <form onSubmit={handleSubmit} className="form-product">
           <div className="mb-3">
@@ -181,15 +191,25 @@ function ProductForm(props) {
               required
             />
           </div>
+          {/* Vista previa de la imagen */}
+          {imagePreview && (
+            <div className="image-preview">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            </div>
+          )}
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">Guardar</button>
+            <button type="submit" className="btn btn-primary">
+              Guardar
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
-
-
 }
 
 export default ProductForm;

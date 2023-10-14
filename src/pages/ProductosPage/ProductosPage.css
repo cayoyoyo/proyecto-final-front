@@ -20,12 +20,11 @@
 }
 
 .liListaProdutos {
-    background-color: rgb(3 109 119 / 72%);
+    background-color: rgba(119, 147, 149, 0.72);
     margin: 1%;
     width: 150px;
     padding: 5px;
     list-style: none;
-    border: solid 1.5px black;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 6px;
@@ -128,8 +127,10 @@
     display: block;
     width: 200px;
     padding-top: 1rem;
-    background-color: rgb(3 109 119 / 72%);
+    border-radius: 8px;
+    background-color: rgba(119, 147, 149, 0.72);
     margin: 10px;
+
 }
 
 .pagProductos {
@@ -145,8 +146,9 @@
     height: 30%;
     display: flex;
     height: 150px;
+    border-radius: 8px;
     align-items: center;
-    background-image: url("https://i.pinimg.com/originals/6b/82/88/6b828845c1bc8135c38fe731701d08c3.jpg");
+    background-color: rgba(26, 26, 26, 0.80);
     background-size: contain;
     margin-top: 10px;
     justify-content: center;

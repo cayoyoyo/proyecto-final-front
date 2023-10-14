@@ -10,11 +10,15 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
-import Chat from "./components/Chat/Chat";
+
 
 import ProductosPage from "./pages/ProductosPage/ProductListPage";
 import ProductosDetailPage from "./pages/ProductosPage/ProductDetailPage";
 import EditProductForm from "./components/EditProductForm/EditProductForm";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 
 function App() {
   return (
@@ -75,6 +79,8 @@ function App() {
 
 
       </Routes>
+
+
     </div>
   );
 }

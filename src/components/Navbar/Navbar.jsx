@@ -1,21 +1,16 @@
-import "./Navbar.css";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
-import "font-awesome/css/font-awesome.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Navbar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider's `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark navBarPg">
       <div className="container-fluid">
-        <a className="navbar-brand" Link to="/profile">
-          {user && user.name}
-        </a>
+        <Link to={isLoggedIn ? "/profile" : "/"} className="navbar-brand">
+          {isLoggedIn ? user.name : "Mi Sitio"}
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -34,36 +29,38 @@ function Navbar() {
                 Inicio
               </Link>
             </li>
-
             {isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" Link to="/product">
+                <Link to="/product" className="nav-link">
                   Productos
                 </Link>
               </li>
             )}
           </ul>
-
-          {isLoggedIn && (
-            <form className="d-flex" role="search">
-              <li className="nav-item">
-                <button onClick={logOutUser}>Logout</button>
-              </li>
-            </form>
-          )}
-
-          {!isLoggedIn && (
-            <form className="d-flex" role="search">
-              <Link to="/signup">
-                {" "}
-                <button>Sign Up</button>{" "}
-              </Link>
-              <Link to="/login">
-                {" "}
-                <button>Login</button>{" "}
-              </Link>
-            </form>
-          )}
+          <form className="d-flex" role="search">
+            {isLoggedIn ? (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <button onClick={logOutUser} className="nav-link">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link to="/signup" className="nav-link">
+                    Sign Up
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link">
+                    Login
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </form>
         </div>
       </div>
     </nav>
