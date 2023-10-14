@@ -8,6 +8,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark navBarPg">
       <div className="container-fluid">
+
         <Link to={isLoggedIn ? "/profile" : "/"} className="navbar-brand">
           {isLoggedIn ? user.name : "Mi Sitio"}
         </Link>
@@ -20,6 +21,8 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
+
+
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
@@ -37,6 +40,7 @@ function Navbar() {
               </li>
             )}
           </ul>
+
           <form className="d-flex" role="search">
             {isLoggedIn ? (
               <ul className="navbar-nav">
@@ -61,6 +65,7 @@ function Navbar() {
               </ul>
             )}
           </form>
+
         </div>
       </div>
     </nav>

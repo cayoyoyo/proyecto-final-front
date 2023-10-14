@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/auth.context";
 import FavoritosButton from "../FavoriteButton/FavoriteButton";
 import Chat from "../Chat/Chat"; // Importa el componente Chat
 import "./ProductDetail.css";
 
 function ProductDetail() {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [showChat, setShowChat] = useState(false);
@@ -14,6 +16,7 @@ function ProductDetail() {
   const [user2Id, setUser2Id] = useState(null);
   const [user2, setuser2] = useState(null);
   console.log("vendedor === ", user2);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Agrega una variable de usuario actual (debes obtener esta información de tu sistema de autenticación)
 
@@ -44,66 +47,100 @@ function ProductDetail() {
   }, [id]);
 
   const toggleChat = () => {
-
     setShowChat(!showChat);
   };
 
+  const handleThumbnailClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
+  const navigateImage = (step) => {
+    const newIndex = currentImageIndex + step;
+    if (newIndex >= 0 && newIndex < product.images.length) {
+      setCurrentImageIndex(newIndex);
+    }
+  };
+
   return (
-    <>
-      {response ? <div>
-        <h2>Detalles del Producto</h2>
-        <div className="divDetailProduct">
-          <div className="detailTitle">
-            <FavoritosButton id={id} />
+    <div className="product-detail-container">
+      {response ? (
+        <div className="product-detail-div1">
+          <h2 className="product-title">Detalles del Producto</h2>
+          <div className="product-info">
 
-            <h2>{product.title}</h2>
-            <p>{product.seller.name}</p>
-
-            {product.available ? (
-              <p className="disponible">DISPONIBLE</p>
-            ) : (
-              <p className="noDisponible">NO DISPONIBLE</p>
-            )}
-
-
-            <Link to={`/product/${id}/edit`}>
-              <button>Editar Producto</button>
-            </Link>
-          </div>
-
-          <div className="product-images">
-            {product.images.map((image, index) => (
-              <div key={index} className="images-individual" >
+            <div className="product-images">
+              <div className="large-image">
                 <img
-                  key={index}
-                  src={image}
-                  alt={`Imagen ${index + 1} de productos`}
-                  className="product-image"
-                /></div>
-            ))}
+                  className="imgDetails"
+                  src={product.images[currentImageIndex]}
+                  alt={`Imagen ${currentImageIndex + 1} de productos`}
+                />
+              </div>
+              <div className="thumbnails">
+                {product.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`thumbnail ${index === currentImageIndex ? 'selected' : ''}`}
+                    onClick={() => handleThumbnailClick(index)}
+                  >
+                    <img
+                      className="thumbnail-img"
+                      src={image}
+                      alt={`Imagen ${index + 1} de productos`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="product-detailss">
+              {product.available ? (
+                <p className="product-status disponible">DISPONIBLE</p>
+              ) : (
+                <p className="product-status no-disponible">NO DISPONIBLE</p>
+              )}
+              <div className="titleDetailsProduct">
+                <div>
+                  <h2 className="product-name">{product.title}</h2>
+                </div>
+                <div>
+                  <FavoritosButton id={id} />
+                </div>
+              </div>
+
+              <p className="product-seller">{product.seller.name}</p>
+
+              <p className="product-condition">
+                <strong>Condición:</strong> {product.condition}
+              </p>
+              <p className="product-price">
+                <strong>Precio:</strong> {product.price} €
+              </p>
+              <p className="product-description">
+                <strong>Descripción:</strong> {product.description}
+              </p>
+              <p className="product-category">
+                <strong>Categoría:</strong> {product.category}
+              </p>
+              {/* <button className="favorite-button">Agregar a Favoritos</button> */}
+              {user._id === user2Id ? (
+                <button className="edit-button1">
+                  <a className="edit-button-a" href={`/product/${id}/edit`}>Editar Producto</a>
+                </button>
+              ) : (
+                <button className="chat-button" onClick={toggleChat}>
+                  {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
+                </button>
+              )}
+
+
+            </div>
           </div>
-
-          <div className="detailText">
-            <p>
-              <strong>Condición:</strong> {product.condition}
-            </p>
-            <p>
-              <strong>Precio:</strong> {product.price}
-            </p>
-            <strong>Descripción:</strong>
-            <p> {product.description}</p>
-          </div>
-          <p>
-            <strong>Category:</strong> {product.category}
-          </p>
+          {showChat && <Chat vendedor={user2} />}
         </div>
-        <button onClick={toggleChat}>CHAT</button>
-
-        
-        </div>
-
-        : <p>Cargando...</p>}
-    </>
+      ) : (
+        <p>Cargando...</p>
+      )}
+    </div>
   );
 }
 

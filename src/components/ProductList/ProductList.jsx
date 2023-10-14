@@ -97,22 +97,22 @@ function ProductList() {
 
             {/* Mostrar las categorías */}
             <div className="categorias">
-  <span
-    tabIndex="0"  // Agrega esta línea para permitir el enfoque
-    onClick={showAllProducts}
-  >
-    Todas
-  </span>{" "}
-  {categories.map((category) => (
-    <span
-      key={category}
-      tabIndex="0"  // Agrega esta línea para permitir el enfoque
-      onClick={() => filterProductsByCategory(category)}
-    >
-      {category}
-    </span>
-  ))}
-</div>
+              <span
+                tabIndex="0"  // Agrega esta línea para permitir el enfoque
+                onClick={showAllProducts}
+              >
+                Todas
+              </span>{" "}
+              {categories.map((category) => (
+                <span
+                  key={category}
+                  tabIndex="0"  // Agrega esta línea para permitir el enfoque
+                  onClick={() => filterProductsByCategory(category)}
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
 
           </div>
 
@@ -150,6 +150,6 @@ function ProductList() {
       )}
     </>
   );
-      }
+}
 
 export default ProductList;
