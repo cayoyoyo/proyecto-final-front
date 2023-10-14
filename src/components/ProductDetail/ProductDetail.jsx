@@ -1,5 +1,7 @@
+/*eslint-disable*/
+
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import FavoritosButton from "../FavoriteButton/FavoriteButton";

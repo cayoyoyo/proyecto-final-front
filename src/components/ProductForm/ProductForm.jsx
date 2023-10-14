@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/auth.context";
 
 function ProductForm(props) {
   const API_URL = "http://localhost:5005";
-  const { user, isLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     title: "",

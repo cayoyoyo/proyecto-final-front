@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import "./HomePage.css";
 import InboxPage from "../chatBox";
 import { Link } from "react-router-dom";

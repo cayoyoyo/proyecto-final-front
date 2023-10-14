@@ -1,11 +1,11 @@
+/*eslint-disable*/
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
 import EditProfile from "../../components/EditProfile/EditProfile";
-import { Card, Button, Carousel } from "react-bootstrap"
-
+import { Card, Button, Carousel } from "react-bootstrap";
 
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
@@ -45,7 +45,9 @@ function ProfilePage() {
         action: "remove",
       })
       .then(() => {
-        const productToRemove = document.querySelector(`.product-card-${productId}`);
+        const productToRemove = document.querySelector(
+          `.product-card-${productId}`
+        );
         if (productToRemove) {
           productToRemove.classList.add("product-card-exit");
 
@@ -112,7 +114,7 @@ function ProfilePage() {
         <div>Cargando...</div>
       ) : profileUser ? (
         <div className="profile">
-          <Card style={{ width: '18rem' }}>
+          <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
               src={`${profileUser.avatar}?t=${Date.now()}`}
@@ -131,10 +133,7 @@ function ProfilePage() {
                   onCancel={handleCancelEdit}
                 />
               ) : (
-                <Button
-                  variant="primary"
-                  onClick={handleEditProfile}
-                >
+                <Button variant="primary" onClick={handleEditProfile}>
                   Editar Perfil
                 </Button>
               )}
@@ -144,12 +143,13 @@ function ProfilePage() {
           <ul className="product-list favUserUl">
             <h5>Favoritos</h5>
             {profileUser.favoriteProducts &&
-              profileUser.favoriteProducts.length > 0 ? (
+            profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
                   <div
-                    className={`product-card ${index === 0 ? 'sticky-product' : ''
-                      }`}
+                    className={`product-card ${
+                      index === 0 ? "sticky-product" : ""
+                    }`}
                   >
                     <button
                       className="btn-delete"
@@ -173,31 +173,35 @@ function ProfilePage() {
                       className="toggle-product-details"
                       onClick={() => toggleDisplay(product._id)}
                     >
-                      {displayState[product._id] ? 'Detalles' : 'Detalles'}
-                      <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
+                      {displayState[product._id] ? "Detalles" : "Detalles"}
+                      <button
+                        className="btn-delete"
+                        onClick={() => handleRemoveFavorite(product._id)}
+                      >
                         <i class="bi bi-trash3-fill"></i>
                       </button>
                     </button>
                     <div
-                      className={`product-details ${displayState[product._id] ? 'active' : ''
-                        }`}
+                      className={`product-details ${
+                        displayState[product._id] ? "active" : ""
+                      }`}
                     >
                       <div>
                         <p>{product.description}</p>
                         <p>Precio: ${product.price}</p>
                         <p>Condición: {product.condition}</p>
+                        <p>Disponible: {product.available ? "Sí" : "No"}</p>
                         <p>
-                          Disponible: {product.available ? 'Sí' : 'No'}
-                        </p>
-                        <p>
-                          Fecha de publicación:{' '}
-                          {new Date(product.publicationDate).toLocaleDateString()}
+                          Fecha de publicación:{" "}
+                          {new Date(
+                            product.publicationDate
+                          ).toLocaleDateString()}
                         </p>
                         <button
                           className="addProducto"
                           onClick={() => toggleDisplay(product._id)}
                         >
-                          {displayState[product._id] ? 'ver menos' : ''}
+                          {displayState[product._id] ? "ver menos" : ""}
                         </button>
                       </div>
                     </div>
@@ -212,7 +216,7 @@ function ProfilePage() {
           <ul className="product-list">
             <h5>Productos en Venta</h5>
             {profileUser.productsForSale &&
-              profileUser.productsForSale.length > 0 ? (
+            profileUser.productsForSale.length > 0 ? (
               profileUser.productsForSale.map((product, index) => (
                 <li key={product._id}>
                   <div className="product-card">
@@ -237,16 +241,17 @@ function ProfilePage() {
                       className="toggle-product-details"
                       onClick={() => toggleDisplay(product._id)}
                     >
-                      {displayState[product._id] ? 'Detalles -' : 'Detalles +'}
+                      {displayState[product._id] ? "Detalles -" : "Detalles +"}
                     </button>
                     <div
-                      className={`product-details ${displayState[product._id] ? 'active' : ''
-                        }`}
+                      className={`product-details ${
+                        displayState[product._id] ? "active" : ""
+                      }`}
                     >
                       <p>Descripción: {product.description}</p>
                       <p>Precio: ${product.price}</p>
                       <p>Condición: {product.condition}</p>
-                      <p>Disponible: {product.available ? 'Sí' : 'No'}</p>
+                      <p>Disponible: {product.available ? "Sí" : "No"}</p>
                     </div>
                   </div>
                 </li>
@@ -261,8 +266,6 @@ function ProfilePage() {
       )}
     </div>
   );
-
 }
 
 export default ProfilePage;
-

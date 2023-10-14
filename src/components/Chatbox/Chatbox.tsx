@@ -1,7 +1,9 @@
+/*eslint-disable*/
+
 import * as React from 'react';
 
 import Talk from 'talkjs';
-import { ChatboxOptions } from 'talkjs/types/talkjs/published/UIOptions';
+import { ChatboxOptions } from 'talkjs/all';
 
 interface DefaultProps extends ChatboxOptions {
     loadingMessage?: string,
@@ -26,8 +28,8 @@ class Chatbox extends React.Component<DefaultProps, object> {
     delete chatboxOptions.loadingMessage;
     delete chatboxOptions.height;
     delete chatboxOptions.minWidth;
-    delete chatboxOptions.session;
-    delete chatboxOptions.conversation;
+    // delete chatboxOptions.session;
+    // delete chatboxOptions.conversation;
 
     this.chatbox = this.props.session.createChatbox(this.props.conversation, chatboxOptions);
     this.chatbox.mount(this.container);
