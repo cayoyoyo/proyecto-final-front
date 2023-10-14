@@ -1,24 +1,26 @@
 .addProduct {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 /* Estilos para las categorías */
 /* Estilos para las categorías */
 .categorias {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    gap: 10px; /* Espacio entre las categorías */
-  }
-  
-  span {
-    padding: 5px;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  span:hover {
-    text-decoration: none; /* Eliminar el subrayado al pasar el cursor */
-  }
-  
-  
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  gap: 10px;
+  /* Espacio entre las categorías */
+}
+
+span {
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+span:hover {
+  text-decoration: none;
+  /* Eliminar el subrayado al pasar el cursor */
+}
+
+/* ----------------------------------------------------------------------------------------------- */

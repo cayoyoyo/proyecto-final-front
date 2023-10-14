@@ -20,7 +20,7 @@ import EditProductForm from "./components/EditProductForm/EditProductForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import InboxPage from "./pages/chatBox";
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -30,7 +30,13 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/inbox" element={< InboxPage />} />
+
+        <Route path="/inbox" element={
+          <IsPrivate>
+            < InboxPage />
+          </IsPrivate>
+        } />
+
         <Route
           path="/profile"
           element={
@@ -82,7 +88,7 @@ function App() {
 
       </Routes>
 
-
+      <Footer />
 
     </div>
   );

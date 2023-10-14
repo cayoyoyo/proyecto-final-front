@@ -50,7 +50,8 @@ function Navbar() {
 
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark navBarPg">
       <div className="container-fluid">
-        <a className="navbar-brand" Link to="/profile">{user && user.name}</a>
+        {/* <a className="navbar-brand" Link to="/profile">{user && user.name}</a> */}
+        <li className="nav-item">< Link to="/profile">{user && user.name}</Link></li>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -93,7 +94,10 @@ function Navbar() {
 
             <li>
               <Link to="/inbox">
-                <b><span><img id="my-messages-icon" src={process.env.PUBLIC_URL + '/assets/images/icons/my-messages.png'} /></span> My Messages</b>
+                <button type="button" class="btn btn-primary">
+                  Inbox <span class="badge text-bg-secondary"></span>
+                </button>
+
               </Link>
             </li>
 

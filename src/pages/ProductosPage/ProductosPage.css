@@ -9,7 +9,7 @@
 }
 
 .btnProducto {
-    font-size: 10px
+    font-size: 10px !important;
 }
 
 .ulListaProdutos {
@@ -17,6 +17,7 @@
     flex-wrap: wrap;
     width: 97%;
     padding: 0px;
+    justify-content: space-between;
 }
 
 .liListaProdutos {
@@ -105,7 +106,7 @@
 .product-images {
     display: flex;
     justify-content: center;
-    margin-top: 70px
+
 }
 
 .images-individual {
@@ -164,4 +165,359 @@
     overflow: hidden;
     height: 27px;
     margin: 0;
+}
+
+/* test ------------- */
+/* Estilos generales */
+.product-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.product-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-images {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-detailss {
+    flex: 1 1;
+    padding: 20px;
+    background-color: #bcd4eaa8;
+    border-radius: 10px;
+    box-shadow: 0 0 17px rgb(87 88 89 / 62%);
+
+}
+
+/* Estilos de los elementos */
+.product-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: math;
+}
+
+.product-seller {
+    font-size: 16px;
+    color: #777;
+}
+
+.product-status {
+    font-weight: bold;
+    font-size: 15px;
+    color: #ffffff;
+
+    padding: 5px;
+}
+
+.titleDetailsProduct {
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-disponible {
+    background-color: #FF5722;
+}
+
+.product-condition,
+.product-price,
+.product-description,
+.product-category {
+    font-size: 15px;
+    margin-top: 10px;
+    color: #333;
+    text-align: left;
+}
+
+.favorite-button,
+edit-button,
+chat-button {
+    background-color: #ff4081;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.favorite-button:hover,
+edit-button:hover,
+chat-button:hover {
+    background-color: #ff005a;
+}
+
+.product-detail-div1 {
+    margin-top: 41px;
+}
+
+.imgDetails {
+    height: 28vw !important;
+}
+
+/* Puedes personalizar aún más los estilos según tus preferencias para lograr un diseño de lujo y glamour. */
+
+/* Estilos para el botón de "Editar Producto" */
+.edit-button1 {
+    background-color: #007bff;
+    color: #fff !important;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-decoration: none !important;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
+
+.edit-button-a {
+    color: #f7f7f7;
+    text-decoration: none
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el botón de "Abrir/Cerrar Chat" */
+.chat-button {
+    background-color: #ff4081;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.chat-button:hover {
+    background-color: #ff005a;
+}
+
+/* Estilos generales */
+.product-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.product-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.product-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.large-image img {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.thumbnails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.thumbnail.selected {
+    border-color: #007bff;
+}
+
+.thumbnail-img {
+    max-width: 50px;
+    height: auto;
+}
+
+.image-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.prev-image,
+.next-image {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.prev-image:hover,
+.next-image:hover {
+    background-color: #0056b3;
+}
+
+/* Más estilos... */
+.chatBox23 {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+    transform: translateX(0);
+    display: block;
+}
+
+.divChat {
+    padding: 40px 20px;
+    background-color: #212529;
+}
+
+@media (max-width: 700px) {
+    .product-info {
+        flex-direction: column;
+        align-items: normal;
+        width: 100%;
+    }
+
+    .product-detailss {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .imgDetails {
+        height: 80vw !important;
+    }
+
+    .product-condition,
+    .product-price,
+    .product-description,
+    .product-category,
+    .product-status,
+    .product-seller,
+    .favoritos-button,
+    .edit-button1 {
+        font-size: 25px;
+
+    }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+
+.titleBtnFav1 {
+    display: flex;
+}
+
+.product-item1 {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 3px;
+}
+
+
+.product-image1 {
+    max-width: 120px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.product-info1 {
+    flex: 1 1;
+    height: 100%;
+    background-color: #c7c3be;
+    padding: 3px;
+}
+
+.product-title1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 18px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.product-price1 {
+    margin: 0;
+    color: #007bff;
+
+    font-size: 20px;
+}
+
+
+.product-details-button1 {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.product-details-button1:hover {
+    background-color: #0056b3;
 }

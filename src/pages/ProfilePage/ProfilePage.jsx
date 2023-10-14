@@ -104,7 +104,8 @@ function ProfilePage() {
                       className={`product-details ${displayState[product._id] ? "active" : ""
                         }`}
                     > */}
-                    <div className={`product-details ${displayState[product._id] ? "active overlay" : ""}`}>
+                    <div className={`product-details ${displayState[product._id] ? "active" : ""
+                      }`}>
 
                       <div>
                         <p>{product.description}</p>

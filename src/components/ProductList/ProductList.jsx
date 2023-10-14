@@ -73,23 +73,47 @@ function ProductList() {
         </div>
         <ul className="ulListaProdutos">
           {products.map((producto) => (
-            <li className="liListaProdutos" key={producto._id}>
-              <FavoritosButton
-                id={producto._id}
-                favorito={producto.isFavorite}
-              />
+            // <li className="liListaProdutos" key={producto._id}>
+            //   <FavoritosButton
+            //     id={producto._id}
+            //     favorito={producto.isFavorite}
+            //   />
+            //   <img
+            //     className="product-image "
+            //     src={producto.images[0]}
+            //     alt={producto.title}
+            //   />
+            //   <p className="titleProducto">{producto.title}</p>
+            //   <p>€ {producto.price}</p>
+
+            //   <Link to={`/product/${producto._id}`}>
+            //     <button className="btnProducto btn btn-light">Ver más </button>
+            //   </Link>
+            // </li>
+
+            <li className="product-item1" key={producto._id}>
+
               <img
-                className="product-image"
+                className="product-image1"
                 src={producto.images[0]}
                 alt={producto.title}
               />
-              <p className="titleProducto">{producto.title}</p>
-              <p>€ {producto.price}</p>
+              <div className="product-info1">
+                <div className="titleBtnFav1">
+                  <h3 className="product-title1">{producto.title}</h3>
+                  <FavoritosButton
+                    id={producto._id}
+                    favorito={producto.isFavorite}
+                  />
+                </div>
 
-              <Link to={`/product/${producto._id}`}>
-                <button className="btnProducto">Ver más </button>
-              </Link>
+                <p className="product-price1">€ {producto.price}</p>
+                <Link to={`/product/${producto._id}`}>
+                  <button className="product-details-button1">Ver más</button>
+                </Link>
+              </div>
             </li>
+
           ))}
         </ul>
       </div>
@@ -104,3 +128,5 @@ function ProductList() {
 }
 
 export default ProductList;
+
+
