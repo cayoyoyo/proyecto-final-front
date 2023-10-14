@@ -41,12 +41,12 @@ function EditProductForm() {
       });
     } else {
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
-};
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,11 +64,11 @@ function EditProductForm() {
 
   const handleDelete = () => {
     const confirmDelete = window.confirm('¿Seguro que quieres eliminar este producto?');
-  
+
     if (!confirmDelete) {
       return;
     }
-  
+
     axios
       .delete(`${API_URL}/product/${id}/delete`)
       .then(() => {
@@ -83,7 +83,7 @@ function EditProductForm() {
 
   return (
     <div className="container mt-5">
-      <div className={`formProduct `} style={{ maxWidth: '400px' }}>
+      <div className={`formProduct1 `} style={{ maxWidth: '100vw' }}>
         <h1>Editar Producto</h1>
         <form onSubmit={handleSubmit} className="form-product">
           <div className="mb-3">
@@ -151,7 +151,7 @@ function EditProductForm() {
       </div>
     </div>
   );
-  
+
 }
 
 export default EditProductForm;

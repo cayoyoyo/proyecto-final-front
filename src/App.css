@@ -14,8 +14,6 @@
   text-align: center;
   position: relative;
   height: 200vh;
-  /* font-family: 'Gabarito', sans-serif; */
-  font-family: 'YoungSerif', sans-serif;
 
 }
 
@@ -30,7 +28,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 60vw;
   z-index: -1;
   background-attachment: fixed;
 }
@@ -43,4 +41,8 @@ body {
 
 main {
   margin-top: 50px;
+}
+
+#inbox-container {
+  height: 40vw;
 }

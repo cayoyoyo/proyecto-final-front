@@ -48,7 +48,7 @@ function ProfilePage() {
         const productToRemove = document.querySelector(`.product-card-${productId}`);
         if (productToRemove) {
           productToRemove.classList.add("product-card-exit");
-  
+
           // Luego, espera a que termine la animación y elimina el producto
           productToRemove.addEventListener("animationend", () => {
             if (productToRemove.parentNode) {
@@ -98,7 +98,7 @@ function ProfilePage() {
           ...profileUser,
           avatar: response.data.avatar,
         });
-  
+
         setIsEditing(false);
       })
       .catch((error) => {
@@ -140,17 +140,16 @@ function ProfilePage() {
               )}
             </Card.Body>
           </Card>
-  
+
           <ul className="product-list favUserUl">
-          <h5>Favoritos</h5>
+            <h5>Favoritos</h5>
             {profileUser.favoriteProducts &&
               profileUser.favoriteProducts.length > 0 ? (
               profileUser.favoriteProducts.map((product, index) => (
                 <li key={product._id}>
                   <div
-                    className={`product-card ${
-                      index === 0 ? 'sticky-product' : ''
-                    }`}
+                    className={`product-card ${index === 0 ? 'sticky-product' : ''
+                      }`}
                   >
                     <button
                       className="btn-delete"
@@ -175,14 +174,13 @@ function ProfilePage() {
                       onClick={() => toggleDisplay(product._id)}
                     >
                       {displayState[product._id] ? 'Detalles' : 'Detalles'}
-                    <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
+                      <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
                     </button>
                     <div
-                      className={`product-details ${
-                        displayState[product._id] ? 'active' : ''
-                      }`}
+                      className={`product-details ${displayState[product._id] ? 'active' : ''
+                        }`}
                     >
                       <div>
                         <p>{product.description}</p>
@@ -210,9 +208,9 @@ function ProfilePage() {
               <li>No hay productos favoritos</li>
             )}
           </ul>
-  
+
           <ul className="product-list">
-          <h5>Productos en Venta</h5>
+            <h5>Productos en Venta</h5>
             {profileUser.productsForSale &&
               profileUser.productsForSale.length > 0 ? (
               profileUser.productsForSale.map((product, index) => (
@@ -242,9 +240,8 @@ function ProfilePage() {
                       {displayState[product._id] ? 'Detalles -' : 'Detalles +'}
                     </button>
                     <div
-                      className={`product-details ${
-                        displayState[product._id] ? 'active' : ''
-                      }`}
+                      className={`product-details ${displayState[product._id] ? 'active' : ''
+                        }`}
                     >
                       <p>Descripción: {product.description}</p>
                       <p>Precio: ${product.price}</p>
@@ -264,7 +261,7 @@ function ProfilePage() {
       )}
     </div>
   );
-  
+
 }
 
 export default ProfilePage;
