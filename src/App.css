@@ -3,12 +3,19 @@
   src: url('../fonts/YoungSerif-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Gabarito';
+  src: url('../fonts/Gabarito-Medium.ttf') format('truetype');
+}
+
 
 
 .App {
   text-align: center;
   position: relative;
   height: 200vh;
+  /* font-family: 'Gabarito', sans-serif; */
+  font-family: 'YoungSerif', sans-serif;
 
 }
 
