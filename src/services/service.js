@@ -1,3 +1,3 @@
-import axios from 'axios';
+import axios from "axios";
 
-const URL = 'http://localhost:5005'; 
+const URL = `${process.env.REACT_APP_SERVER_URL}`;

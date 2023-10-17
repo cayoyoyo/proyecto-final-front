@@ -13,15 +13,18 @@
 .App {
   text-align: center;
   position: relative;
-  height: 200vh;
+  height: 180vh;
+  font-family: 'YoungSerif', sans-serif;
 
 }
 
 .App::before {
   content: "";
-  background-image: url('../public/fondo.jpg');
-  background-color: rgba(255, 255, 255, 0.3);
-
+  /* background-image: url('../public/fondo.jpg'); */
+  /* background-color: rgb(241, 242, 244); */
+  /* background-color: rgb(232, 235, 238); */
+  /* background-color:#f4f5f6; */
+  background-color: #FFF;
   opacity: 0.9;
 
   position: absolute;
@@ -34,13 +37,13 @@
 }
 
 body {
-  background-image: url("https://res.cloudinary.com/dzau21or3/image/upload/v1696098482/products…");
+  /* background-image: url("https://res.cloudinary.com/dzau21or3/image/upload/v1696098482/products…"); */
   background-attachment: fixed;
-  font-family: 'YoungSerif', sans-serif;
+  margin-top:120px !important;
 }
 
 main {
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 #inbox-container {

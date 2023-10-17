@@ -1,5 +1,26 @@
 .addProduct {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  background-color: #66CCFF;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+.addProduct:hover {
+  background-color: #3388CC;
+  color: #fff;
+}
+
+/* Estilo para cuando se presiona el botón */
+.addProduct:active {
+  background-color: #66CCFF;
 }
 
 /* Estilos para las categorías */
@@ -22,11 +43,15 @@ span {
 
 /* Estilo para la categoría seleccionada */
 span:focus {
-  background-color: #007bff;
+  background-color:#343435;
   /* Color de fondo personalizable */
   color: #fff;
   /* Color del texto personalizable */
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 30px;
+}
+
+.titulocat {
+  margin-top: 20px;
 }

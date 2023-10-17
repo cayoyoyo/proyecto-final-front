@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios"; // Importa Axios
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 function EditProfile({ user, onSave, onCancel }) {
   const [formData, setFormData] = useState({
@@ -11,7 +11,9 @@ function EditProfile({ user, onSave, onCancel }) {
     // Agrega más campos según sea necesario
   });
 
-  const [previewImage, setPreviewImage] = useState(user.profileImageUrl || null);
+  const [previewImage, setPreviewImage] = useState(
+    user.profileImageUrl || null
+  );
 
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
@@ -44,13 +46,16 @@ function EditProfile({ user, onSave, onCancel }) {
 
     // Verifica si se ha seleccionado una nueva foto de perfil
     if (formData.profilePhoto) {
-        console.log("Nueva imagen seleccionada:", formData.profilePhoto);
+      console.log("Nueva imagen seleccionada:", formData.profilePhoto);
       formDataToSend.append("profile-photo", formData.profilePhoto);
     }
 
     // Realiza la solicitud con Axios
     axios
-      .put(`http://localhost:5005/profile/${user._id}/edit-profile`, formDataToSend)
+      .put(
+        `${process.env.REACT_APP_SERVER_URL}/profile/${user._id}/edit-profile`,
+        formDataToSend
+      )
       .then((response) => {
         // Verifica si la respuesta es exitosa
         if (response.status === 200) {

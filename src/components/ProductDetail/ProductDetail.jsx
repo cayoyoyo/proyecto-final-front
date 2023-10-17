@@ -22,30 +22,26 @@ function ProductDetail() {
 
   // Agrega una variable de usuario actual (debes obtener esta información de tu sistema de autenticación)
 
-  const API_URL = "http://localhost:5005";
+  const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
 
   useEffect(() => {
     axios
       .get(`${API_URL}/product/${id}`)
       .then((ProductDetail) => {
         setProduct(ProductDetail.data);
-        setUser2Id(ProductDetail.data.seller._id)
+        setUser2Id(ProductDetail.data.seller._id);
         setResponse(true);
-        return ProductDetail.data.seller._id
+        return ProductDetail.data.seller._id;
       })
       .then((user2) => {
-
         axios
-          .get(`http://localhost:5005/profile/${user2}`)
+          .get(`${process.env.REACT_APP_SERVER_URL}/profile/${user2}`)
           .then((response) => {
             console.log("setuser2 ", response.data);
             setuser2(response.data);
-          })
-
+          });
       })
       .catch((err) => console.log(err));
-
-
   }, [id]);
 
   const toggleChat = () => {
@@ -69,7 +65,6 @@ function ProductDetail() {
         <div className="product-detail-div1">
           <h2 className="product-title">Detalles del Producto</h2>
           <div className="product-info">
-
             <div className="product-images">
               <div className="large-image">
                 <img
@@ -82,7 +77,9 @@ function ProductDetail() {
                 {product.images.map((image, index) => (
                   <div
                     key={index}
-                    className={`thumbnail ${index === currentImageIndex ? 'selected' : ''}`}
+                    className={`thumbnail ${
+                      index === currentImageIndex ? "selected" : ""
+                    }`}
                     onClick={() => handleThumbnailClick(index)}
                   >
                     <img
@@ -126,15 +123,15 @@ function ProductDetail() {
               {/* <button className="favorite-button">Agregar a Favoritos</button> */}
               {user._id === user2Id ? (
                 <button className="edit-button1">
-                  <a className="edit-button-a" href={`/product/${id}/edit`}>Editar Producto</a>
+                  <a className="edit-button-a" href={`/product/${id}/edit`}>
+                    Editar Producto
+                  </a>
                 </button>
               ) : (
                 <button className="chat-button" onClick={toggleChat}>
-                  {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
+                  {showChat ? "Cerrar Chat" : "Abrir Chat"}
                 </button>
               )}
-
-
             </div>
           </div>
           {showChat && <Chat vendedor={user2} />}
@@ -145,6 +142,5 @@ function ProductDetail() {
     </div>
   );
 }
-
 
 export default ProductDetail;

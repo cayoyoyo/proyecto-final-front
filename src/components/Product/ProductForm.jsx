@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function ProductForm() {
-  const API_URL = "http://localhost:5005";
+  const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     price: 0,
-    condition: 'new',
+    condition: "new",
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,19 +33,19 @@ function ProductForm() {
       formDataWithImage.append(key, value);
     });
 
-    formDataWithImage.append('product-image', selectedImage);
+    formDataWithImage.append("product-image", selectedImage);
 
     axios
       .post(`${API_URL}/product/add`, formDataWithImage, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
-        console.log('Producto agregado con éxito:', response.data);
+        console.log("Producto agregado con éxito:", response.data);
       })
       .catch((error) => {
-        console.error('Error al agregar un producto:', error);
+        console.error("Error al agregar un producto:", error);
       });
   };
 
