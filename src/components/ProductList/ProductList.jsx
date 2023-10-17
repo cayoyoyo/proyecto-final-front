@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -6,9 +7,8 @@ import ProductForm from "../ProductForm/ProductForm";
 import Searchbar from "../Searchbar/Searchbar";
 import "./ProductList.css";
 
-
 function ProductList() {
-  const API_URL = "http://localhost:5005";
+  const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
 
   const [products, setProducts] = useState([]);
   const [originalProducts, setOriginalProducts] = useState([]); // Almacenar todos los productos originales
@@ -79,7 +79,7 @@ function ProductList() {
         <div className="pagProductos">
           <div className="categoria">
             <button
-              className="addProducto"
+              className="addProduct"
               onClick={() => {
                 if (display === "none") {
                   setDisplay("active");
@@ -88,7 +88,7 @@ function ProductList() {
                 }
               }}
             >
-              New Product{" "}
+              Añadir Producto{" "}
             </button>
 
             <div className={display}>
@@ -96,9 +96,14 @@ function ProductList() {
             </div>
 
             {/* Mostrar las categorías */}
+            <p className="titulocat">
+              <b>
+                <u>Categorias</u>
+              </b>
+            </p>
             <div className="categorias">
               <span
-                tabIndex="0"  // Agrega esta línea para permitir el enfoque
+                tabIndex="0" // Agrega esta línea para permitir el enfoque
                 onClick={showAllProducts}
               >
                 Todas
@@ -106,25 +111,28 @@ function ProductList() {
               {categories.map((category) => (
                 <span
                   key={category}
-                  tabIndex="0"  // Agrega esta línea para permitir el enfoque
+                  tabIndex="0" // Agrega esta línea para permitir el enfoque
                   onClick={() => filterProductsByCategory(category)}
                 >
                   {category}
                 </span>
               ))}
             </div>
-
           </div>
 
           <div className="listado">
             <div className="searchbar1">
               <Searchbar onSearch={handleSearch} />
             </div>
+
             <ul className="ulListaProdutos">
               {products.map((producto) => (
                 <li className="liListaProdutos" key={producto._id}>
                   {/* Renderización de productos */}
-                  <FavoritosButton id={producto._id} favorito={producto.isFavorite} />
+                  <FavoritosButton
+                    id={producto._id}
+                    favorito={producto.isFavorite}
+                  />
                   <img
                     className="product-image"
                     src={producto.images[0]}
@@ -143,7 +151,10 @@ function ProductList() {
       ) : (
         <div class="d-flex gap-2 justify-content-center py-5">
           <button class="btn btn-primary" type="button" disabled>
-            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span
+              class="spinner-border spinner-border-sm"
+              aria-hidden="true"
+            ></span>
             <span role="status">Loading...</span>
           </button>
         </div>

@@ -4,8 +4,8 @@ import "./ProductForm.css";
 import { AuthContext } from "../../context/auth.context";
 
 function ProductForm(props) {
-  const API_URL = "http://localhost:5005";
-  const { user, isLoading } = useContext(AuthContext);
+  const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
+  const { user } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -98,7 +98,6 @@ function ProductForm(props) {
   return (
     <div className="container mt-5">
       <div className={`formProduct ${display}`} style={{ maxWidth: "400px" }}>
-        <h1>Formulario de Producto</h1>
         <form onSubmit={handleSubmit} className="form-product">
           <div className="mb-3">
             <label htmlFor="title" className="form-label">

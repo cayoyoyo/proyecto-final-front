@@ -1,4 +1,4 @@
-
+/*eslint-disable*/
 
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import Talk from 'talkjs';

@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import "./EditProductForm.css";
 
-
-
-const API_URL = 'http://localhost:5005';
+const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
 
 function EditProductForm() {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     price: 0,
-    condition: 'new',
+    condition: "new",
     images: [],
   });
 
@@ -26,7 +24,7 @@ function EditProductForm() {
         setFormData(response.data);
       })
       .catch((error) => {
-        console.error('Error al obtener los detalles del producto:', error);
+        console.error("Error al obtener los detalles del producto:", error);
       });
   }, [id]);
 
@@ -40,7 +38,6 @@ function EditProductForm() {
         images: selectedImages,
       });
     } else {
-
       setFormData({
         ...formData,
         [name]: value,
@@ -54,16 +51,18 @@ function EditProductForm() {
     axios
       .put(`${API_URL}/product/${id}/edit`, formData)
       .then((response) => {
-        console.log('Producto actualizado con éxito:', response.data);
+        console.log("Producto actualizado con éxito:", response.data);
         navigate(`/product/${id}`);
       })
       .catch((error) => {
-        console.error('Error al actualizar el producto:', error);
+        console.error("Error al actualizar el producto:", error);
       });
   };
 
   const handleDelete = () => {
-    const confirmDelete = window.confirm('¿Seguro que quieres eliminar este producto?');
+    const confirmDelete = window.confirm(
+      "¿Seguro que quieres eliminar este producto?"
+    );
 
     if (!confirmDelete) {
       return;
@@ -72,18 +71,17 @@ function EditProductForm() {
     axios
       .delete(`${API_URL}/product/${id}/delete`)
       .then(() => {
-        console.log('Producto eliminado con éxito');
-        navigate('/product');
+        console.log("Producto eliminado con éxito");
+        navigate("/product");
       })
       .catch((error) => {
-        console.error('Error al eliminar el producto:', error);
+        console.error("Error al eliminar el producto:", error);
       });
   };
 
-
   return (
     <div className="container mt-5">
-      <div className={`formProduct1 `} style={{ maxWidth: '100vw' }}>
+      <div className={`formProduct1 `} style={{ maxWidth: "100vw" }}>
         <h1>Editar Producto</h1>
         <form onSubmit={handleSubmit} className="form-product">
           <div className="mb-3">
@@ -144,14 +142,21 @@ function EditProductForm() {
             </select>
           </div>
           <div>
-            <button type="submit" className="btn btn-primary">Guardar Cambios</button>
-            <button type="button" onClick={handleDelete} className="btn btn-danger">Eliminar Producto</button>
+            <button type="submit" className="btn btn-primary">
+              Guardar Cambios
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="btn btn-danger"
+            >
+              Eliminar Producto
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
-
 }
 
 export default EditProductForm;

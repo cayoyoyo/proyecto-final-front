@@ -15,25 +15,25 @@
 .ulListaProdutos {
     display: flex;
     flex-wrap: wrap;
-    width: 97%;
+    width: 95%;
     padding: 0px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .liListaProdutos {
-    background-color: rgba(119, 147, 149, 0.72);
+    background-color: #F4F5F6;
     margin: 1%;
-    width: 150px;
+    width: 250px;
+    height: 350px;
     padding: 5px;
     list-style: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     padding: 6px;
     /* font-weight: bold; */
     text-align: center;
     /* font-size: 24px; */
     color: #333;
-    height: 200px;
 
 }
 
@@ -126,14 +126,24 @@
 
 .categoria {
     display: block;
-    width: 200px;
+    width: 250px;
     padding-top: 1rem;
     border-radius: 8px;
-    background-color: rgba(119, 147, 149, 0.72);
+    /* background-color:#E9EBEE; */
+    /* background-color:#888888; */
+    /* background-color: #66CCFF; */
+    background-color: rgba(102, 204, 255, 0.7);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+
+
     margin: 10px;
 
 }
 
+
+
+  
 .pagProductos {
     display: flex;
 }
@@ -149,10 +159,13 @@
     height: 150px;
     border-radius: 8px;
     align-items: center;
-    background-color: rgba(26, 26, 26, 0.80);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     background-size: contain;
     margin-top: 10px;
     justify-content: center;
+    /* background-color: rgb(241, 242, 244);  */
+    /* background-color:#E9EBEE; */
+    background-color: #888;
 }
 
 .searchbar-input {
@@ -167,6 +180,7 @@
     overflow: hidden;
     height: 27px;
     margin: 0;
+    
 }
 
 /* test ------------- */

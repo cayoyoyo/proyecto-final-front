@@ -1,16 +1,22 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import "./Navbar.css";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark navBarPg">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark navBarPg">
       <div className="container-fluid">
-
-        <Link to={isLoggedIn ? "/profile" : "/"} className="navbar-brand">
-          {isLoggedIn ? user.name : "Mi Sitio"}
+        <Link to="/" className="navbar-brand">
+          <img
+            src="/logoletrablanca.png"
+            alt="Logo"
+            width="140"
+            height="38"
+            className="bi me-2 logo"
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -21,29 +27,33 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-
-
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <ul className="navbar-nav me-auto mb-2 mb-md-0">
-            <li className="nav-item">
-              <Link to="/" aria-current="page" className="nav-link active">
-                Inicio
-              </Link>
-            </li>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {isLoggedIn && (
-              <li className="nav-item">
+              <li className="nav-item productos">
                 <Link to="/product" className="nav-link">
                   Productos
                 </Link>
               </li>
             )}
           </ul>
-
           <form className="d-flex" role="search">
             {isLoggedIn ? (
               <ul className="navbar-nav">
+                <li className="nav-item">
+                <Link  to={isLoggedIn ? "/inbox" : "/"}
+                    className="navbar-brand">
+                    inbox
+                    </Link>
+                  <Link
+                    to={isLoggedIn ? "/profile" : "/"}
+                    className="navbar-brand"
+                  >
+                    {isLoggedIn ? user.name : ""}
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <button onClick={logOutUser} className="nav-link">
                     Logout
@@ -65,7 +75,6 @@ function Navbar() {
               </ul>
             )}
           </form>
-
         </div>
       </div>
     </nav>

@@ -6,7 +6,7 @@ import FavoritosButton from "../FavoriteButton";
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const API_URL = "http://localhost:5005";
+  const API_URL = `${process.env.REACT_APP_SERVER_URL}`;
 
   useEffect(() => {
     axios

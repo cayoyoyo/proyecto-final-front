@@ -1,11 +1,11 @@
+/*eslint-disable*/
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import "./ProfilePage.css";
 import EditProfile from "../../components/EditProfile/EditProfile";
-import { Card, Button, Carousel } from "react-bootstrap"
-
+import { Card, Button, Container, Row, Col, Collapse } from "react-bootstrap";
 
 function ProfilePage() {
   const { user, isLoading } = useContext(AuthContext);
@@ -18,7 +18,7 @@ function ProfilePage() {
       const storedToken = localStorage.getItem("authToken");
 
       const userId = user._id;
-      const apiUrl = `http://localhost:5005/profile/${userId}`;
+      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/profile/${userId}`;
 
       axios
         .get(apiUrl, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -37,7 +37,7 @@ function ProfilePage() {
   }, [user, isLoading]);
 
   const handleRemoveFavorite = (productId) => {
-    const apiUrl = `http://localhost:5005/profile/${profileUser._id}/favorites`;
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/profile/${profileUser._id}/favorites`;
 
     axios
       .post(apiUrl, {
@@ -45,7 +45,9 @@ function ProfilePage() {
         action: "remove",
       })
       .then(() => {
-        const productToRemove = document.querySelector(`.product-card-${productId}`);
+        const productToRemove = document.querySelector(
+          `.product-card-${productId}`
+        );
         if (productToRemove) {
           productToRemove.classList.add("product-card-exit");
 
@@ -56,7 +58,9 @@ function ProfilePage() {
             }
           });
         }
-        return axios.get(`http://localhost:5005/profile/${profileUser._id}/`);
+        return axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/profile/${profileUser._id}/`
+        );
       })
       .then((user) => {
         setProfileUser(user.data);
@@ -86,7 +90,7 @@ function ProfilePage() {
     const storedToken = localStorage.getItem("authToken");
 
     const userId = profileUser._id;
-    const apiUrl = `http://localhost:5005/profile/${userId}/edit-profile`;
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/profile/${userId}/edit-profile`;
 
     axios
       .put(apiUrl, formData, {
@@ -112,7 +116,14 @@ function ProfilePage() {
         <div>Cargando...</div>
       ) : profileUser ? (
         <div className="profile">
-          <Card style={{ width: '18rem' }}>
+          <Card
+            style={{
+              width: "14rem",
+              marginTop: "50px",
+              marginLeft: "80px",
+              marginRight: "60px",
+            }}
+          >
             <Card.Img
               variant="top"
               src={`${profileUser.avatar}?t=${Date.now()}`}
@@ -131,138 +142,114 @@ function ProfilePage() {
                   onCancel={handleCancelEdit}
                 />
               ) : (
-                <Button
-                  variant="primary"
-                  onClick={handleEditProfile}
-                >
+                <Button variant="primary" onClick={handleEditProfile}>
                   Editar Perfil
                 </Button>
               )}
             </Card.Body>
           </Card>
 
-          <ul className="product-list favUserUl">
-            <h5>Favoritos</h5>
-            {profileUser.favoriteProducts &&
-              profileUser.favoriteProducts.length > 0 ? (
-              profileUser.favoriteProducts.map((product, index) => (
-                <li key={product._id}>
-                  <div
-                    className={`product-card ${index === 0 ? 'sticky-product' : ''
-                      }`}
-                  >
-                    <button
-                      className="btn-delete"
-                      onClick={() => handleRemoveFavorite(product._id)}
-                    >
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                    <div className="product-image ">
-                      {product.images && product.images.length > 0 ? (
-                        <img
-                          className="profile-image"
-                          src={product.images[0]}
-                          alt={product.title}
+          <Container className="fav-container">
+            <h5 className="sticky-top bg-white p-2">Favoritos</h5>
+            <Row xs={1} sm={2} md={3} lg={2}>
+              {profileUser.favoriteProducts.map((product, index) => (
+                <Col key={product._id}>
+                  <Card className="product-card">
+                    <Link to={`/product/${product._id}`}>
+                      <Card.Img
+                        className="product-img"
+                        variant="top"
+                        src={
+                          product.images && product.images.length > 0
+                            ? product.images[0]
+                            : "placeholder.jpg"
+                        }
+                      />{" "}
+                    </Link>
+                    <Card.Body>
+                      <Card.Title>{product.title}</Card.Title>
+                      <Card.Text>
+                        Precio: ${product.price}
+                        <br />
+                        Disponible: {product.available ? "Sí" : "No"}
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveFavorite(product._id)}
+                      >
+                        Eliminar
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                  {index === 1 && <hr className="my-3" />}
+                </Col>
+              ))}
+            </Row>
+          </Container>
+
+          <Container className="fav-container">
+            <h5 className="sticky-top bg-white p-2">Productos en Venta</h5>
+            <Row xs={1} sm={2} md={3} lg={2}>
+              {profileUser.productsForSale &&
+              profileUser.productsForSale.length > 0 ? (
+                profileUser.productsForSale.map((product, index) => (
+                  <Col key={product._id}>
+                    <Card className="product-card">
+                      <Link to={`/product/${product._id}/edit`}>
+                        <Card.Img
+                          className="product-img"
+                          variant="top"
+                          src={
+                            product.images && product.images.length > 0
+                              ? product.images[0]
+                              : "placeholder.jpg"
+                          }
                         />
-                      ) : (
-                        <div>No hay imagen disponible</div>
-                      )}
-                    </div>
-                    <p className="titleProducto">{product.title}</p>
-                    <button
-                      className="toggle-product-details"
-                      onClick={() => toggleDisplay(product._id)}
-                    >
-                      {displayState[product._id] ? 'Detalles' : 'Detalles'}
-                      <button className="btn-delete" onClick={() => handleRemoveFavorite(product._id)}>
-                        <i class="bi bi-trash3-fill"></i>
-                      </button>
-                    </button>
-                    <div
-                      className={`product-details ${displayState[product._id] ? 'active' : ''
-                        }`}
-                    >
-                      <div>
-                        <p>{product.description}</p>
-                        <p>Precio: ${product.price}</p>
-                        <p>Condición: {product.condition}</p>
-                        <p>
-                          Disponible: {product.available ? 'Sí' : 'No'}
-                        </p>
-                        <p>
-                          Fecha de publicación:{' '}
-                          {new Date(product.publicationDate).toLocaleDateString()}
-                        </p>
-                        <button
-                          className="addProducto"
+                      </Link>
+                      <Card.Body>
+                        <Card.Title>{product.title}</Card.Title>
+                        <Card.Text>
+                          Precio: ${product.price}
+                          <br />
+                          Disponible: {product.available ? "Sí" : "No"}
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Footer>
+                        <Button
+                          variant="danger"
                           onClick={() => toggleDisplay(product._id)}
                         >
-                          {displayState[product._id] ? 'ver menos' : ''}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <li>No hay productos favoritos</li>
-            )}
-          </ul>
-
-          <ul className="product-list">
-            <h5>Productos en Venta</h5>
-            {profileUser.productsForSale &&
-              profileUser.productsForSale.length > 0 ? (
-              profileUser.productsForSale.map((product, index) => (
-                <li key={product._id}>
-                  <div className="product-card">
-                    <Link to={`/product/${product._id}/edit`}>
-                      <button className="editProductPerfil">
-                        <i class="bi bi-pencil-square btn-profile-edit"></i>
-                      </button>
-                    </Link>
-                    <div className="product-image">
-                      {product.images && product.images.length > 0 ? (
-                        <img
-                          className="profile-image"
-                          src={product.images[0]}
-                          alt={product.title}
-                        />
-                      ) : (
-                        <div>No hay imagen disponible</div>
-                      )}
-                    </div>
-                    <p className="titleProducto">{product.title}</p>
-                    <button
-                      className="toggle-product-details"
-                      onClick={() => toggleDisplay(product._id)}
-                    >
-                      {displayState[product._id] ? 'Detalles -' : 'Detalles +'}
-                    </button>
-                    <div
-                      className={`product-details ${displayState[product._id] ? 'active' : ''
-                        }`}
-                    >
-                      <p>Descripción: {product.description}</p>
-                      <p>Precio: ${product.price}</p>
-                      <p>Condición: {product.condition}</p>
-                      <p>Disponible: {product.available ? 'Sí' : 'No'}</p>
-                    </div>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <li>No hay productos en venta</li>
-            )}
-          </ul>
+                          {displayState[product._id]
+                            ? "Ocultar Detalles"
+                            : "Mostrar Detalles"}
+                        </Button>
+                      </Card.Footer>
+                      <Collapse in={displayState[product._id]}>
+                        <div className="product-details">
+                          <Card.Text>
+                            Descripción: {product.description}
+                            <br />
+                            Condición: {product.condition}
+                          </Card.Text>
+                        </div>
+                      </Collapse>
+                    </Card>
+                    {index === 1 && <hr className="my-3" />}
+                  </Col>
+                ))
+              ) : (
+                <li>No hay productos en venta</li>
+              )}
+            </Row>
+          </Container>
         </div>
       ) : (
         <div>No se pudo cargar el perfil del usuario.</div>
       )}
     </div>
   );
-
 }
 
 export default ProfilePage;
-
