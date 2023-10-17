@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import Talk from 'talkjs';
-import { ChatboxOptions } from 'talkjs/types/talkjs/published/UIOptions';
+import { ChatboxOptions } from 'talkjs/all';
 
 interface DefaultProps extends ChatboxOptions {
-    loadingMessage?: string,
-    height?: number,
-    minWidth?: number,
-    
-    session: Talk.Session | null,
-    conversation: Talk.ConversationBuilder | Talk.Conversation | null
+  loadingMessage?: string,
+  height?: number,
+  minWidth?: number,
+
+  session: Talk.Session | null,
+  conversation: Talk.ConversationBuilder | Talk.Conversation | null
 }
 
 class Chatbox extends React.Component<DefaultProps, object> {
@@ -19,15 +19,15 @@ class Chatbox extends React.Component<DefaultProps, object> {
 
   async initialize() {
     if (!this.props.session || !this.props.conversation) {
-        return;
+      return;
     }
 
-    const chatboxOptions = {...this.props};
+    const chatboxOptions = { ...this.props };
     delete chatboxOptions.loadingMessage;
     delete chatboxOptions.height;
     delete chatboxOptions.minWidth;
-    delete chatboxOptions.session;
-    delete chatboxOptions.conversation;
+    // delete chatboxOptions.session;
+    // delete chatboxOptions.conversation;
 
     this.chatbox = this.props.session.createChatbox(this.props.conversation, chatboxOptions);
     this.chatbox.mount(this.container);
@@ -42,12 +42,12 @@ class Chatbox extends React.Component<DefaultProps, object> {
       this.chatbox.destroy();
     }
   }
-    
+
   public render() {
     return (
-            <div id="Chatbox" style={{height: this.props.height, width: this.props.minWidth, textAlign: 'center'}} ref={container => this.container = container}>
-                {this.props.loadingMessage}
-            </div>);
+      <div id="Chatbox" style={{ height: this.props.height, width: this.props.minWidth, textAlign: 'center' }} ref={container => this.container = container}>
+        {this.props.loadingMessage}
+      </div>);
   }
 }
 
