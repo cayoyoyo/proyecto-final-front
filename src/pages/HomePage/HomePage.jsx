@@ -1,45 +1,40 @@
 /*eslint-disable*/
 
 import "./HomePage.css";
-import InboxPage from "../chatBox";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import FavoritosButton from '../../components/FavoriteButton/FavoriteButton';
+import { Card, Button, Container, Row, Col, Collapse } from "react-bootstrap";
+
 
 function HomePage() {
-  const premiumProducts = [
-    {
-      id: 1,
-      category: 'Electrónica',
-      title: 'Smartphone de última generación',
-      date: 'Nov 15',
-      description: 'Este smartphone cuenta con las últimas características y un rendimiento excepcional.',
-      thumbnail: 'https://media.ldlc.com/r1600/ld/products/00/05/97/77/LD0005977700.jpg',
-    },
-    {
-      id: 2,
-      category: 'Moda',
-      title: 'Zapatos de diseñador',
-      date: 'Nov 14',
-      description: 'Los zapatos de diseñador más elegantes y cómodos que encontrarás.',
-      thumbnail: 'https://img.joomcdn.net/56d1089062c82987b54ca70cf588f6fb7d904dd1_original.jpeg',
-    },
-    {
-      id: 3,
-      category: 'Hogar y Jardín',
-      title: 'Muebles de lujo',
-      date: 'Nov 13',
-      description: 'Decora tu hogar con estos muebles de lujo y estilo.',
-      thumbnail: 'https://img5.su-cdn.com/cdn-cgi/image/width=600,height=600,format=webp/mall/file/2021/05/14/41a7551b9d4e438fbcac187630584436.jpg',
-    },
-    // Agrega más productos premium aquí
-    {
-      id: 10,
-      category: 'Electrónica',
-      title: 'Auriculares inalámbricos de alta calidad',
-      date: 'Nov 10',
-      description: 'Disfruta de la mejor calidad de sonido con estos auriculares inalámbricos.',
-      thumbnail: 'https://www.macysdigital.com/wp-content/uploads/2023/04/JBL-TUNE-720BT-azul-1.png',
-    },
-  ];
+ 
+  const [productosPrime, setProductosPrime] = useState([]);
+
+  const produtosPrime = () => {
+    const API_URL = `${process.env.REACT_APP_SERVER_URL}/product`;
+
+    axios
+      .get(API_URL)
+      .then((response) => {
+        // Filtra los productos cuyos vendedores tienen isPrime === true
+        console.log(response.data);
+        const productosFiltrados = response.data.filter((producto) => producto.seller.isPrime);
+
+        // Almacena los productos Prime en el estado
+        setProductosPrime(productosFiltrados);
+      })
+      .catch((error) => {
+        console.error('Error al obtener productos:', error);
+      });
+  }
+
+  useEffect(() => {
+    produtosPrime()
+  }, []);
+
+  console.log("productosPrime ------- > " + productosPrime.length);
 
 
   return (
@@ -102,41 +97,47 @@ function HomePage() {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      {/* ----------------------------------------------------------------------------------------test ---------------- */}
+   
 
+<div>
 
+      <Row xs={1} sm={2} md={3} lg={3}>
+          {productosPrime.map((product) => (
+            <Col key={product._id} className="colProductHome" >
+              <Card className="product-card">
+              <Link to={`/product/${product._id}`}>
+                  <Card.Img
+                    className="product-img"
+                    variant="top"
+                    src={
+                      product.images && product.images.length > 0
+                        ? product.images[0]
+                        : "placeholder.jpg"
+                    }
+                  />
+                </Link>
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Text>
+                    Precio: ${product.price}
+                    <br />
+                    Disponible: {product.available ? "Sí" : "No"}
+                    <FavoritosButton
+                    id={product._id}
+                    favorito={product.isFavorite}
+                  />
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer>
 
-      {/* ------------ copia  --------------- */}
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      
 
-
-
-      <div className="row mb-2">
-        {premiumProducts.map((product) => (
-          <div className="col-md-6" key={product.id}>
-            <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-              <div className="col p-4 d-flex flex-column position-static">
-                <strong className="d-inline-block mb-2 text-primary-emphasis">{product.category}</strong>
-                <h3 className="mb-0">{product.title}</h3>
-                <div className="mb-1 text-body-secondary">{product.date}</div>
-                <p className="card-text mb-auto">{product.description}</p>
-                <a href="#" className="icon-link gap-1 icon-link-hover stretched-link">
-                  Continue reading
-                  <svg className="bi"><use xlinkHref="#chevron-right" /></svg>
-                </a>
-              </div>
-              <div className="col-auto d-none d-lg-block">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  width="200"
-                  height="250"
-                />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
+</div>
 
     </main>
   );
