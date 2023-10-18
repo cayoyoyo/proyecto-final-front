@@ -14,7 +14,7 @@
   text-align: center;
   position: relative;
   height: 180vh;
-  font-family: 'YoungSerif', sans-serif;
+  font-family: 'Gabarito', sans-serif;
 
 }
 
@@ -39,7 +39,7 @@
 body {
   /* background-image: url("https://res.cloudinary.com/dzau21or3/image/upload/v1696098482/products…"); */
   background-attachment: fixed;
-  margin-top:120px !important;
+  margin-top:100px !important;
 }
 
 main {

@@ -133,7 +133,7 @@ function ProfilePage() {
               <Card.Text>
                 Location: {profileUser.location}
                 <br />
-                E-mail: {profileUser.email}
+             {profileUser.email}
               </Card.Text>
               {isEditing ? (
                 <EditProfile
@@ -167,7 +167,7 @@ function ProfilePage() {
                       />{" "}
                     </Link>
                     <Card.Body>
-                      <Card.Title>{product.title}</Card.Title>
+                      <Card.Title className="titulofav">{product.title}</Card.Title>
                       <Card.Text>
                         Precio: ${product.price}
                         <br />

@@ -61,6 +61,8 @@ function EditProfile({ user, onSave, onCancel }) {
         if (response.status === 200) {
           console.log("Perfil actualizado con éxito");
           setPreviewImage(response.data.avatar);
+          
+          onSave(response.data);
         } else {
           // El servidor respondió con un error, puedes manejarlo aquí
           console.error("Error al actualizar el perfil:", response.data);
@@ -171,7 +173,7 @@ function EditProfile({ user, onSave, onCancel }) {
             <img
               src={previewImage}
               alt="Preview"
-              style={{ maxWidth: "200px", marginTop: "10px" }}
+              style={{ maxWidth: "100%", marginTop: "10px" }}
             />
           )}
         </Form.Group>

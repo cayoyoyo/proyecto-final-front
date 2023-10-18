@@ -123,6 +123,7 @@ function ProductForm(props) {
               onChange={handleChange}
               className="form-control"
               id="description"
+              rows={7} 
               required
             />
           </div>

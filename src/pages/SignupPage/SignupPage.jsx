@@ -4,8 +4,6 @@ import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-// import axios from "axios";
-
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -13,12 +11,13 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
 
-
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+  const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
   const handleLocation = (e) => setLocation(e.target.value);
 
@@ -77,31 +76,39 @@ function SignupPage() {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
+  
+    if (password !== confirmPassword) {
+      // Muestra un mensaje de error o realiza alguna acción en caso de que las contraseñas no coincidan
+      setErrorMessage("Las contraseñas no coinciden");
+      return;
+    }
+  
     // Create an object representing the request body
     const requestBody = { email, password, name, location };
-
-    // Send a request to the server using axios
-
+  
+    // Envía una solicitud al servidor utilizando axios o tu servicio
+  
     // const authToken = localStorage.getItem("authToken");
     // axios
     //   .post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody, {
     //     headers: { Authorization: `Bearer ${authToken}` },
     //   })
     // .then((response) => {})
-
-    // Or using a service
+  
+    // O usa un servicio
     authService
       .signup(requestBody)
       .then((response) => {
-        // If the POST request is successful redirect to the login page
+        // Si la solicitud POST es exitosa, redirige a la página de inicio de sesión
         navigate("/login");
       })
       .catch((error) => {
-        // If the request resolves with an error, set the error message in the state
+        // Si la solicitud se resuelve con un error, establece el mensaje de error en el estado
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
   };
+  
 
   return (
     <div className="container my-5">
@@ -138,6 +145,20 @@ function SignupPage() {
             </div>
 
             <div className="form-floating mb-3">
+  <input
+    type="password"
+    className="form-control"
+    id="confirmPassword"
+    name="confirmPassword"
+    value={confirmPassword} 
+    onChange={handleConfirmPassword} 
+    placeholder="Confirm your password"
+    required
+  />
+  <label htmlFor="confirmPassword">Confirm Password</label>
+</div>
+
+            <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
@@ -152,13 +173,16 @@ function SignupPage() {
             </div>
 
             <div className="form-floating mb-3">
-              <label htmlFor="location">Location (Provincia)</label>
+              <label htmlFor="location" className={`form-label custom-label`}>
+                Location (Provincia)
+              </label>
               <select
                 name="location"
                 id="location"
                 value={location}
                 onChange={handleLocation}
-                className="form-control"
+                className="form-select"
+                style={{ height: "90px" }}
                 required
               >
                 <option value=""></option>
