@@ -25,7 +25,6 @@ function ProductList() {
     "Juguetes",
     "Vehículos",
     "Deportes y Fitness",
-    "Arte y Antigüedades",
     "Libros y Revistas",
     "Otros",
   ];

@@ -19,13 +19,13 @@
 
 
 .fav-container, .sales-container {
-  width: 600px !important;
+  width: 500px !important;
   height: 480px; /* Tamaño deseado */
   margin: 0 auto; /* Centra el contenedor horizontalmente */
   overflow: auto; /* Agrega una barra de desplazamiento si es necesario */
   margin-top: 50px;
   margin-right: 20px;
-  background-color:#888 !important;
+  background-color:#e9ebee !important;
 }
 
 .fav-container h5, .sales-container h5 {

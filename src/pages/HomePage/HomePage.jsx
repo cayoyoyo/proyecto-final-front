@@ -59,9 +59,9 @@ function HomePage() {
             </svg> */}
             <div class="container">
               <div class="carousel-caption text-start">
-                <h1>Eletronicos de calidad!</h1>
+                <h1 className="letrasportada">¡Todo lo que puedas imaginar, a solo un clic de distancia!</h1>
 
-                <p><Link class="btn btn-lg btn-primary" to="/products">Eletronicos</Link></p>
+                <p><Link class="btn btn-lg btn-primary" to="/product">Productos</Link></p>
               </div>
             </div>
           </div>
@@ -72,23 +72,23 @@ function HomePage() {
             {/* <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)" /></svg> */}
             <div class="container">
               <div class="carousel-caption">
-                <h1>Another example headline.</h1>
-                <p>Some representative placeholder content for the second slide of the carousel.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                <h1 className="letrasportada2">Libros que inspiran, a un clic de distancia.</h1>
+                <p></p>
+                <p><a class="btn btn-lg btn-primary" href="#" to="/product">Productos</a></p>
               </div>
             </div>
           </div>
 
           <div class="carousel-item">
 
-            <img src="https://i.pinimg.com/564x/33/e5/65/33e56550ff260c55974971103c4a7767.jpg" alt="Descripción de la imagen" className="d-block w-100" width="100%" height="50%" />
+            <img src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg" alt="Descripción de la imagen" className="d-block w-100" width="100%" height="50%" />
 
             {/* <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)" /></svg> */}
             <div class="container">
               <div class="carousel-caption text-end">
-                <h1>One more for good measure.</h1>
-                <p>Some representative placeholder content for the third slide of this carousel.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                
+                <p className="letrasportada">Encuentra el auto de tus sueños en un solo lugar.</p>
+                <p><a class="btn btn-lg btn-primary" href="#" to="/product">Productos</a></p>
               </div>
             </div>
           </div>
