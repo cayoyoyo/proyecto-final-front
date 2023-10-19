@@ -1,51 +1,49 @@
-# proyecto 3
+# Vende Ya
 
-![Imagen del Proyecto](url-de-la-imagen-del-proyecto)
-Tienda en línea, donde los usuarios pueden comprar y vender productos
+![Imagen del Proyecto](no tenemos)
+Página web de comercio en línea para productos usados, donde los usuarios pueden hablar directamente con el vendedor a través de un chat para coordinar la venta.
 
 ## Acerca del Proyecto
-¡Hola! Soy [Tu Nombre], diseñador y desarrollador de este proyecto. Esta aplicación tiene como objetivo [explica brevemente la finalidad o objetivo de la aplicación].
-
+¡Hola! Somos Carlos Campagnolo y Joao Carlos Oliveira, diseñadores y desarrolladores de este proyecto. Esta aplicación tiene como objetivo facilitar la compra y venta de productos usados, permitiendo a los usuarios comunicarse con los vendedores a través de un chat.
 
 ## Despliegue
-Puedes ver la aplicación completamente desplegada [aquí](url-de-despliegue-del-proyecto). 
+Puedes ver la aplicación completamente desplegada [aquí](https://vendeya.netlify.app/).
 
+# Guía de Instalación
+Para contribuir al proyecto, sigue estos pasos:
 
-# Installation Guide
-Fork this repo
-Clone this repo
-```shell
-$ cd portfolio-back
-$ npm install
-$ npm start
-```
+1. Haz un fork del repositorio.
+2. Crea una nueva rama para tu contribución.
+3. Realiza tus cambios y asegúrate de que los tests pasen.
+4. Envía un Pull Request con tus cambios.
 
+## Rutas
+| Ruta                  | Privacidad       | Página que Renderiza     |
+|-----------------------|------------------|--------------------------|
+| /                     | Pública          | HomePage                 |
+| /inbox                | Privada          | InboxPage                |
+| /profile              | Privada          | ProfilePage              |
+| /signup               | Anónima          | SignupPage               |
+| /login                | Anónima          | LoginPage                |
+| /product              | Privada          | ProductosPage            |
+| /product/:id          | Privada          | ProductosDetailPage      |
+| /product/:id/edit     | Privada          | EditProductForm          |
 
-## Routes 
-| Route                | Privacy         | Renders                  |
-|----------------------|-----------------|--------------------------|
-| /                    | Public          | HomePage
-| /signup              | Public          | SignupPage               |
-| /login               | Public          | LoginPage                |
-| /home                | Public          | HomePage                 |
-| /products            | Public          | ProductsPage             |
-| /products/:id        | Public          | ProductDetailsPage       |
-| /profile             | Private (user)  | ProfilePage              |
-| /favs                | Private (user)  | FavoritesPage            |
-| /perfilinfo          | Private (user)  | ProfileInfoPage          |
+## Componentes
 
-
-
-## Components
-
-- Navbar
+- ChatBox
+- Chat
+- FavoriteButton
 - Footer
+- Inbox
+- EditProductForm
+- EditProfile
+- IsPrivate
+- Loading
+- NavBar
 - SearchBar
-- AddProduct
-- AddFavorite
-- EditProduct
-- PrivateRoute
 
-
-
+## Colaboradores
+- Carlos Campagnolo
+- Joao Carlos Oliveira
 
