@@ -56,7 +56,7 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
                   <button onClick={logOutUser} className="nav-link">
-                    Logout
+                  Cerrar sesión
                   </button>
                 </li>
               </ul>
@@ -64,12 +64,12 @@ function Navbar() {
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <Link to="/signup" className="nav-link">
-                    Sign Up
+                  Registrarse
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/login" className="nav-link">
-                    Login
+                  Iniciar sesión
                   </Link>
                 </li>
               </ul>

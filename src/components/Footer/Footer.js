@@ -32,21 +32,11 @@ function Footer() {
             </Link>
           </li>
           <li className="nav-item">
-            <a href="#" className="nav-link px-2 text-body-secondary">
-              Características
+            <a href="#" className="nav-link px-2 text-body-secondary" to="/product">
+              Productos
             </a>
           </li>
-          {/* <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">Pricing</a></li> */}
-          <li className="nav-item">
-            <a href="#" className="nav-link px-2 text-body-secondary">
-              FAQs
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#" className="nav-link px-2 text-body-secondary">
-              Sobre
-            </a>
-          </li>
+          
         </ul>
       </footer>
     </div>

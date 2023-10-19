@@ -131,7 +131,7 @@ function ProfilePage() {
             <Card.Body>
               <Card.Title>Perfil de {profileUser.name}</Card.Title>
               <Card.Text>
-                Location: {profileUser.location}
+              Ubicación: {profileUser.location}
                 <br />
              {profileUser.email}
               </Card.Text>
@@ -142,7 +142,7 @@ function ProfilePage() {
                   onCancel={handleCancelEdit}
                 />
               ) : (
-                <Button variant="primary" onClick={handleEditProfile}>
+                <Button variant="primary" onClick={handleEditProfile} style={{ backgroundColor: "#66CCFF", border: "none" }}>
                   Editar Perfil
                 </Button>
               )}
@@ -209,7 +209,7 @@ function ProfilePage() {
                         />
                       </Link>
                       <Card.Body>
-                        <Card.Title>{product.title}</Card.Title>
+                        <Card.Title className="titulofav">{product.title}</Card.Title>
                         <Card.Text>
                           Precio: ${product.price}
                           <br />
@@ -217,7 +217,7 @@ function ProfilePage() {
                         </Card.Text>
                       </Card.Body>
                       <Card.Footer>
-                        <Button
+                        <Button style={{color: "#000", backgroundColor: "rgb(232, 235, 238)", border: "none" }}
                           variant="danger"
                           onClick={() => toggleDisplay(product._id)}
                         >

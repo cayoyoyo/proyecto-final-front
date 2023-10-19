@@ -48,7 +48,7 @@ function LoginPage() {
     <div className="container my-5">
     <div className="row justify-content-center">
       <div className="col-lg-5 col-md-7 col-sm-9">
-        <h2 className="text-center mb-4">Login</h2>
+        <h2 className="text-center mb-4">Iniciar sesión</h2>
         <form onSubmit={handleLoginSubmit} className="p-4 border rounded">
           <div className="form-floating mb-3">
             <input
@@ -75,19 +75,19 @@ function LoginPage() {
               placeholder="Your password"
               required
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Contraseña</label>
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Login
+          Iniciar sesión
           </button>
 
           {errorMessage && (
             <p className="error error-message">{errorMessage}</p>
           )}
         </form>
-        <p>Don't have an account yet?</p>
-        <Link to={"/signup"}> Sign Up</Link>
+        <p>¿Aún no tienes una cuenta?</p>
+        <Link to={"/signup"}> Registrarse</Link>
       </div>
     </div>
   </div>

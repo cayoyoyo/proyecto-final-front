@@ -114,7 +114,7 @@ function SignupPage() {
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-lg-5 col-md-7 col-sm-9">
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Crea una cuenta</h2>
           <form onSubmit={handleSignupSubmit} className="p-4 border rounded">
             <div className="form-floating mb-3">
               <input
@@ -127,7 +127,7 @@ function SignupPage() {
                 placeholder="Your email"
                 required
               />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Dirección de email</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -141,7 +141,7 @@ function SignupPage() {
                 placeholder="Your password"
                 required
               />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Contraseña</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -155,7 +155,7 @@ function SignupPage() {
     placeholder="Confirm your password"
     required
   />
-  <label htmlFor="confirmPassword">Confirm Password</label>
+  <label htmlFor="confirmPassword">Confirmar contraseña</label>
 </div>
 
             <div className="form-floating mb-3">
@@ -169,12 +169,12 @@ function SignupPage() {
                 placeholder="Your name"
                 required
               />
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Nombre</label>
             </div>
 
             <div className="form-floating mb-3">
               <label htmlFor="location" className={`form-label custom-label`}>
-                Location (Provincia)
+                Ubicación (Provincia)
               </label>
               <select
                 name="location"
@@ -195,7 +195,7 @@ function SignupPage() {
             </div>
 
             <button type="submit" className="btn btn-primary">
-              Sign Up
+              Crear cuenta
             </button>
 
             {errorMessage && (

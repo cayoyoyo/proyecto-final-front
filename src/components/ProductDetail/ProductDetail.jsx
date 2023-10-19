@@ -128,7 +128,7 @@ function ProductDetail() {
                   </a>
                 </button>
               ) : (
-                <button className="chat-button" onClick={toggleChat}>
+                <button className="chat-button" style={{ backgroundColor: "#66CCFF", border: "none" }} onClick={toggleChat}>
                   {showChat ? "Cerrar Chat" : "Abrir Chat"}
                 </button>
               )}

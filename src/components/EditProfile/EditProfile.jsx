@@ -177,10 +177,13 @@ function EditProfile({ user, onSave, onCancel }) {
             />
           )}
         </Form.Group>
-        <Button type="submit">Guardar</Button>
-        <Button type="button" onClick={onCancel}>
-          Cancelar
-        </Button>
+        <Button type="submit" className="btn btn-primary" style={{ padding: "5px 10px" }}>
+  Guardar
+</Button>
+<Button type="button" className="btn btn-danger" style={{ padding: "5px 10px" }} onClick={onCancel}>
+  Cancelar
+</Button>
+
       </Form>
     </Container>
   );
