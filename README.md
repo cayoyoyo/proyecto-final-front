@@ -1,6 +1,5 @@
 # Vende Ya
 
-![Imagen del Proyecto](https://res-console.cloudinary.com/dzau21or3/thumbnails/v1/image/upload/v1697732354/cHJvZmlsZXMvamFqdmxya2RneTdyb21pd2xxN2k=/grid_landscape)
 
 Página web de comercio en línea para productos usados, donde los usuarios pueden hablar directamente con el vendedor a través de un chat para coordinar la venta.
 
